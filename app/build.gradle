@@ -1,0 +1,19 @@
+apply plugin: 'com.android.application'
+apply from:'../dependencies.gradle'
+
+android {
+
+    defaultConfig {
+        applicationId "com.fuusy.jetpackkt"
+    }
+
+}
+
+dependencies {
+
+    if (!singleModule.toBoolean()) {
+        implementation project(path: ':home')
+        implementation project(path: ':common')
+        implementation project(path: ':webview')
+    }
+}

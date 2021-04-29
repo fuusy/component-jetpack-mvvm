@@ -1,0 +1,5 @@
+include ':webview'
+include ':home'
+include ':common'
+include ':app'
+rootProject.name = "JetPackKt"

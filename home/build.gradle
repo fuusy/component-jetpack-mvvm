@@ -1,0 +1,18 @@
+if (!singleModule.toBoolean()) {
+    apply plugin: 'com.android.library'
+} else {
+    apply plugin: 'com.android.application'
+}
+apply from:'../dependencies.gradle'
+
+
+dependencies {
+    implementation project(path: ':common')
+
+    //banner
+    implementation 'com.youth.banner:banner:2.1.0'
+
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
+
+}
+

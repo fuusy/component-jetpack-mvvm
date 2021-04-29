@@ -1,0 +1,25 @@
+if (!singleModule.toBoolean()) {
+    apply plugin: 'com.android.library'
+} else {
+    apply plugin: 'com.android.application'
+}
+
+apply from:'../dependencies.gradle'
+
+android{
+    sourceSets{
+        main {
+            if (!singleModule.toBoolean()) {
+                //如果是library，则编译manifest下AndroidManifest.xml
+                manifest.srcFile 'src/main/manifest/AndroidManifest.xml'
+            } else {
+                //如果是application，则编译主目录下AndroidManifest.xml
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+            }
+        }
+    }
+}
+
+dependencies {
+    implementation project(path: ':common')
+}
