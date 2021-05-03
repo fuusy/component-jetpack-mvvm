@@ -1,9 +1,13 @@
 package com.fuusy.common.network
 
+import android.util.Log
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+
+private const val TAG = "RetrofitManager"
 
 object RetrofitManager {
 
@@ -14,9 +18,12 @@ object RetrofitManager {
         .writeTimeout(10, TimeUnit.SECONDS)
         .retryOnConnectionFailure(true)
         .followRedirects(false)
-        .addNetworkInterceptor(LogInterceptor {
-            logLevel(LogInterceptor.LogLevel.BODY)
-        }).build()
+        .addInterceptor(HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
+            override fun log(message: String) {
+                Log.d(TAG, "log: $message")
+            }
+
+        }).setLevel(HttpLoggingInterceptor.Level.BODY)).build()
 
     private var mRetrofit: Retrofit? = null
 

@@ -57,13 +57,20 @@ class DailyQuestionPagingAdapter :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DailyVH {
-        return DailyVH(
+        val dailyVH = DailyVH(
             ItemRvArticleBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
             )
         )
+        dailyVH.itemView.setOnClickListener {
+            ARouter.getInstance()
+                .build(Constants.PATH_WEBVIEW)
+                .withString("key_path", getItem(dailyVH.layoutPosition)?.link)
+                .navigation()
+        }
+        return dailyVH
 
     }
 }

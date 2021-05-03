@@ -5,7 +5,7 @@ import androidx.lifecycle.lifecycleScope
 import com.fuusy.common.base.BaseFragment
 import com.fuusy.home.R
 import com.fuusy.home.adapter.paging.DailyQuestionPagingAdapter
-import com.fuusy.home.adapter.paging.FooterAdapter
+import com.fuusy.common.paging.FooterAdapter
 import com.fuusy.home.databinding.FragmentDailyQuestionBinding
 import com.fuusy.home.viewmodel.ArticleViewModel
 import kotlinx.coroutines.flow.collectLatest
@@ -30,9 +30,10 @@ class DailyQuestionFragment : BaseFragment<FragmentDailyQuestionBinding, Article
     }
 
     private fun initRecyclerview() {
-        mBinding?.rvDailyQuestion?.adapter = dailyPagingAdapter.withLoadStateFooter(FooterAdapter{
+        mBinding?.rvDailyQuestion?.adapter = dailyPagingAdapter.withLoadStateFooter(
+            FooterAdapter {
 
-        })
+            })
     }
 
     override fun getLayoutId(): Int {

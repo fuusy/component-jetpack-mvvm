@@ -11,9 +11,13 @@ android {
 
 dependencies {
 
+    implementation project(path: ':common')
+    implementation project(path: ':service')
     if (!singleModule.toBoolean()) {
         implementation project(path: ':home')
-        implementation project(path: ':common')
         implementation project(path: ':webview')
+        implementation project(path: ':personal')
+        implementation project(path: ':project')
+        implementation project(path: ':login')
     }
 }

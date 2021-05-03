@@ -1,3 +1,7 @@
+include ':service'
+include ':login'
+include ':project'
+include ':personal'
 include ':webview'
 include ':home'
 include ':common'

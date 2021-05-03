@@ -1,6 +1,7 @@
 package com.fuusy.webview
 
 import android.graphics.Bitmap
+import android.os.Bundle
 import android.view.ViewGroup
 import android.webkit.WebResourceError
 import android.webkit.WebResourceRequest
@@ -17,7 +18,7 @@ class WebviewActivity : BaseActivity<ActivityWebviewBinding>() {
 
     private lateinit var mWebView: WebView
 
-    override fun initData() {
+    override fun initData(savedInstanceState: Bundle?) {
         val path = intent.extras?.getString("key_path")
 
         initWebView(path)
@@ -72,4 +73,6 @@ class WebviewActivity : BaseActivity<ActivityWebviewBinding>() {
         mWebView.destroy()
         super.onDestroy()
     }
+
+
 }

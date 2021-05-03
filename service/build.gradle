@@ -1,0 +1,13 @@
+apply plugin: 'com.android.library'
+apply from:'../dependencies.gradle'
+dependencies {
+
+    if (!singleModule.toBoolean()) {
+        implementation project(path: ':home')
+        implementation project(path: ':webview')
+        implementation project(path: ':personal')
+        implementation project(path: ':project')
+        implementation project(path: ':login')
+    }
+
+}

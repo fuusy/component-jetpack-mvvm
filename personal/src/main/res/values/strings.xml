@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">personal</string>
+    <string name="personal_go_to_login">点击头像登录/注册</string>
+</resources>

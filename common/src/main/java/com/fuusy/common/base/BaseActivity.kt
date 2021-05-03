@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import com.fuusy.common.support.StatusBar
 import com.fuusy.common.view.LoadingDialog
 
 abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity {
@@ -15,9 +16,11 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+        StatusBar().fitSystemBar(this)
         mLoadingDialog = LoadingDialog(this, false)
         mBinding = DataBindingUtil.setContentView(this, getLayoutId())
-        initData()
+        initData(savedInstanceState)
 
     }
 
@@ -26,7 +29,7 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity {
         mBinding?.unbind()
     }
 
-    abstract fun initData()
+    abstract fun initData(savedInstanceState: Bundle?)
 
     abstract fun getLayoutId(): Int
 

@@ -3,7 +3,6 @@ package com.fuusy.common.base
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.fuusy.common.network.BaseResp
 import kotlinx.coroutines.*
 import java.lang.Exception
 
@@ -22,7 +21,7 @@ open class BaseViewModel : ViewModel() {
           viewModelScope.launch(Dispatchers.IO) {
                try {
                     block()
-               } catch (e: Throwable) {
+               } catch (e: Exception) {
                     error(e)
                } finally {
                     complete()

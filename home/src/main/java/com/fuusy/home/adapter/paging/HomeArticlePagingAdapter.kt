@@ -6,15 +6,15 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.alibaba.android.arouter.launcher.ARouter
+import com.fuusy.common.support.Constants
 import com.fuusy.home.ArticleData
 import com.fuusy.home.databinding.ItemRvArticleBinding
 
 private const val TAG = "HomeArticlePagingAdapte"
 
 class HomeArticlePagingAdapter :
-    PagingDataAdapter<ArticleData, ArticleVH>(
-        differCallback
-    ) {
+    PagingDataAdapter<ArticleData, ArticleVH>(differCallback) {
 
     companion object {
         val differCallback = object : DiffUtil.ItemCallback<ArticleData>() {
@@ -37,7 +37,15 @@ class HomeArticlePagingAdapter :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleVH {
-        return ArticleVH.createVH(parent)
+        val createVH = ArticleVH.createVH(parent)
+
+        createVH.itemView.setOnClickListener {
+            ARouter.getInstance()
+                .build(Constants.PATH_WEBVIEW)
+                .withString("key_path", getItem(createVH.layoutPosition)?.link)
+                .navigation()
+        }
+        return createVH
     }
 }
 

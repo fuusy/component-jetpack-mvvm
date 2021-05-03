@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_dashboard"
+    app:startDestination="@id/fragment_project">
+
+
+    <fragment
+        android:id="@+id/fragment_project"
+        android:name="com.fuusy.project.ui.ProjectFragment"
+        tools:layout="@layout/fragment_project" >
+
+        <action
+            android:id="@+id/action_fragment_project_to_projectContentFragment"
+            app:destination="@id/projectContentFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/projectContentFragment"
+        android:name="com.fuusy.project.ui.ProjectContentFragment"
+        android:label="fragment_project_content"
+        tools:layout="@layout/fragment_project_content" />
+
+
+</navigation>
