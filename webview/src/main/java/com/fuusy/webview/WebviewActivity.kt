@@ -19,8 +19,8 @@ class WebviewActivity : BaseActivity<ActivityWebviewBinding>() {
     private lateinit var mWebView: WebView
 
     override fun initData(savedInstanceState: Bundle?) {
+        initToolbar()
         val path = intent.extras?.getString("key_path")
-
         initWebView(path)
     }
 
@@ -72,6 +72,16 @@ class WebviewActivity : BaseActivity<ActivityWebviewBinding>() {
         (mWebView.parent as ViewGroup).removeView(mWebView)
         mWebView.destroy()
         super.onDestroy()
+    }
+
+    private fun initToolbar() {
+        mBinding?.run {
+            setToolbarBackIcon(toolbarLayout.ivBack, R.drawable.ic_back_clear)
+            setToolbarTitle(toolbarLayout.tvTitle, "")
+            toolbarLayout.ivBack.setOnClickListener {
+                finish()
+            }
+        }
     }
 
 

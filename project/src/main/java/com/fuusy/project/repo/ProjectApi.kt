@@ -1,7 +1,6 @@
 package com.fuusy.project.repo
 
 import com.fuusy.common.network.BasePagingResp
-import com.fuusy.common.network.BaseRepository
 import com.fuusy.common.network.BaseResp
 import com.fuusy.project.bean.ProjectContent
 import com.fuusy.project.bean.ProjectTree

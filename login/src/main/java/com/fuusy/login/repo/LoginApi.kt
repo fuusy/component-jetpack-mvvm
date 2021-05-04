@@ -1,8 +1,7 @@
 package com.fuusy.login.repo
 
 import com.fuusy.common.network.BaseResp
-import com.fuusy.login.bean.LoginResp
-import retrofit2.http.Body
+import com.fuusy.service.repo.LoginResp
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST

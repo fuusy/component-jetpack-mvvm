@@ -7,7 +7,9 @@ import com.alibaba.android.arouter.launcher.ARouter
 import com.fuusy.common.base.BaseVmActivity
 import com.fuusy.common.support.Constants
 import com.fuusy.common.support.Constants.Companion.KEY_LIVEDATA_BUS_LOGIN
+import com.fuusy.common.support.Constants.Companion.SP_KEY_USER_INFO_NAME
 import com.fuusy.common.support.LiveDataBus
+import com.fuusy.common.utils.SpUtils
 import com.fuusy.login.R
 import com.fuusy.login.databinding.ActivityLoginBinding
 import com.fuusy.login.viewmodel.LoginViewModel
@@ -18,13 +20,26 @@ private const val TAG = "LoginActivity"
 class LoginActivity : BaseVmActivity<ActivityLoginBinding, LoginViewModel>() {
 
     override fun initData() {
+        initToolbar()
         initListener()
         registerObserve()
+    }
+
+    private fun initToolbar() {
+        mBinding?.run {
+            setToolbarBackIcon(llToolbarLogin.ivBack, R.drawable.ic_back_clear)
+            setToolbarTitle(llToolbarLogin.tvTitle, "登录")
+            llToolbarLogin.ivBack.setOnClickListener {
+                finish()
+            }
+        }
     }
 
     private fun registerObserve() {
         mViewModel.loginLiveData.observe(this, Observer {
             showToast("登录成功")
+            SpUtils.put(SP_KEY_USER_INFO_NAME, it.nickname)
+            //DbHelper.insertUserInfo(this, it)
             LiveDataBus.get().with(KEY_LIVEDATA_BUS_LOGIN)
                 .postValue(it)
             finish()

@@ -4,7 +4,7 @@ package com.fuusy.project.ui
 import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.lifecycleScope
 import com.fuusy.common.base.BaseFragment
-import com.fuusy.common.paging.FooterAdapter
+import com.fuusy.common.widget.FooterAdapter
 import com.fuusy.common.support.Constants
 import com.fuusy.project.R
 import com.fuusy.project.adapter.ProjectPagingAdapter
@@ -18,6 +18,8 @@ class ProjectContentFragment : BaseFragment<FragmentProjectContentBinding, Proje
     private val projectAdapter = ProjectPagingAdapter()
 
     override fun initData() {
+
+        initTitle()
 
         arguments?.apply {
             val int = this.getInt(Constants.KEY_PROJECT_ID)
@@ -36,6 +38,15 @@ class ProjectContentFragment : BaseFragment<FragmentProjectContentBinding, Proje
         }
 
 
+    }
+
+    private fun initTitle() {
+        mBinding?.run {
+            llToolbar.tvTitle.text = "项目"
+            llToolbar.ivBack.setOnClickListener {
+                requireActivity().onBackPressed()
+            }
+        }
     }
 
     override fun getLayoutId(): Int =

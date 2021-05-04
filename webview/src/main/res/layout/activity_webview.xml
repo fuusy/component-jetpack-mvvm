@@ -10,7 +10,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".WebviewActivity">
+        tools:context=".WebviewActivity"
+        android:background="@color/color_ffffff"
+        android:fitsSystemWindows="true">
 
         <include
             android:id="@+id/toolbar_layout"

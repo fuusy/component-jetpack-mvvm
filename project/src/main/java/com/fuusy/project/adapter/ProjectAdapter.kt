@@ -14,7 +14,8 @@ class ProjectAdapter : RecyclerView.Adapter<ProjectAdapter.ProjectVH>() {
 
     private var projectTreeList: List<ProjectTree> = ArrayList()
 
-    fun setData(projectTreeList: List<ProjectTree>){
+
+    fun setData(projectTreeList: List<ProjectTree>) {
         this.projectTreeList = projectTreeList
         notifyDataSetChanged()
     }
@@ -23,10 +24,9 @@ class ProjectAdapter : RecyclerView.Adapter<ProjectAdapter.ProjectVH>() {
 
         private val mBinding = binding
 
-        fun bind(projectTree: ProjectTree){
+        fun bind(projectTree: ProjectTree) {
             mBinding.run {
                 tvProjectTitle.text = projectTree.name
-
             }
         }
     }
@@ -37,7 +37,7 @@ class ProjectAdapter : RecyclerView.Adapter<ProjectAdapter.ProjectVH>() {
             ItemProjectAllBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
         projectVH.itemView.setOnClickListener {
-            //跳转到
+            //跳转到project分类详情
             val navController = Navigation.findNavController(it)
             val bundle = Bundle()
             bundle.putInt(KEY_PROJECT_ID, projectTreeList[projectVH.layoutPosition].id)

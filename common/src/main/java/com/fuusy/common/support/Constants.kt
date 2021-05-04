@@ -12,5 +12,8 @@ class Constants {
 
         const val KEY_LIVEDATA_BUS_LOGIN = "KEY_LIVEDATA_BUS_LOGIN"
         const val KEY_PROJECT_ID = "KEY_PROJECT_ID"
+
+        //Sp
+        const val SP_KEY_USER_INFO_NAME = "SP_KEY_USER_INFO_NAME"
     }
 }

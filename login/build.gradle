@@ -21,6 +21,6 @@ android{
 }
 dependencies {
     implementation project(path: ':common')
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation project(path: ':service')
+
 }

@@ -15,7 +15,7 @@ import com.fuusy.common.ktx.setupWithNavController
 import com.fuusy.common.support.Constants
 import com.fuusy.home.ui.HomeFragment
 import com.fuusy.jetpackkt.databinding.ActivityMainBinding
-import com.fuusy.personal.PersonalFragment
+import com.fuusy.personal.ui.PersonalFragment
 import com.fuusy.project.ui.ProjectFragment
 
 private const val TAG = "MainActivity"

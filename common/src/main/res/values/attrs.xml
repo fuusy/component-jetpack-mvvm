@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RulerView">
+        <attr name="textColor" format="color" />
+        <attr name="textSize" format="dimension" />
+        <attr name="lineColor" format="color" />
+        <attr name="lineSpaceWidth" format="dimension" />
+        <attr name="lineWidth" format="dimension" />
+        <attr name="lineMaxHeight" format="dimension" />
+        <attr name="lineMidHeight" format="dimension" />
+        <attr name="lineMinHeight" format="dimension" />
+        <attr name="textMarginTop" format="dimension" />
+        <attr name="alphaEnable" format="boolean" />
+        <attr name="minValue" format="float" />
+        <attr name="maxValue" format="float" />
+        <attr name="selectorValue" format="float" />
+        <attr name="perValue" format="float" />
+    </declare-styleable>
+
+
+    <declare-styleable name="SettingItem">
+        <attr name="leftTopText" format="string"/>
+        <attr name="leftText" format="string" />
+        <attr name="leftIcon" format="integer" />
+        <attr name="rightIcon" format="integer" />
+        <attr name="LtextSize" format="float" />
+        <attr name="LtextColor" format="color" />
+        <attr name="isShowUnderLine" format="boolean" />
+        <attr name="leftIconSize" format="dimension" />
+        <attr name="leftTextMarginLeft" format="dimension" />
+        <attr name="rightStyle" format="enum">
+            <enum name="text" value="0" />
+            <enum name="text_icon" value="1" />
+            <enum name="icon" value="2" />
+            <enum name="text_radiobutton" value="3" />
+            <enum name="text_edittext" value="4" />
+            <enum name="text_bottom_text" value="5" />
+            <enum name="none" value="6" />
+        </attr>
+        <attr name="isShowRightText" format="boolean" />
+        <attr name="rightText" format="string" />
+        <attr name="rightIconText" format="string" />
+        <attr name="bottomText" format="string" />
+        <attr name="editTextHInt" format="string" />
+        <attr name="rightTextSize" format="float" />
+        <attr name="rightTextColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="RoundCornerImageView">
+        <attr name="radius" format="dimension" />
+        <attr name="left_top_radius" format="dimension" />
+        <attr name="right_top_radius" format="dimension" />
+        <attr name="right_bottom_radius" format="dimension" />
+        <attr name="left_bottom_radius" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="PointIndicator">
+        <attr name="point_size" format="dimension"/>
+        <attr name="point_space" format="dimension"/>
+        <attr name="normal_color" format="color"/>
+        <attr name="select_color" format="color"/>
+    </declare-styleable>
+
+    <declare-styleable name="AndRatingBar">
+        <!-- color of star -->
+        <attr name="starColor" format="color|reference" />
+
+        <!-- color of secondary star -->
+        <attr name="subStarColor" format="color|reference" />
+
+        <!-- color of background star -->
+        <attr name="bgColor" format="color|reference" />
+
+        <!-- drawable of star -->
+        <attr name="starDrawable" format="reference" />
+
+        <!-- drawable of background star -->
+        <attr name="bgDrawable" format="reference" />
+
+        <!-- if keep the origin color of star drawable -->
+        <attr name="keepOriginColor" format="boolean" />
+
+        <!-- the scale factor of ratingbar that can change the spacing of star -->
+        <attr name="scaleFactor" format="float" />
+
+        <!-- additional the spacing of the star -->
+        <attr name="starSpacing" format="dimension" />
+
+        <!-- right to left -->
+        <attr name="right2Left" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="MultiStateView">
+        <attr name="msv_loadingView" format="reference" />
+        <attr name="msv_emptyView" format="reference" />
+        <attr name="msv_errorView" format="reference" />
+        <attr name="msv_viewState" format="enum">
+            <enum name="content" value="0" />
+            <enum name="error" value="1" />
+            <enum name="empty" value="2" />
+            <enum name="loading" value="3" />
+        </attr>
+        <attr name="msv_animateViewChanges" format="boolean" />
+    </declare-styleable>
+
+</resources>

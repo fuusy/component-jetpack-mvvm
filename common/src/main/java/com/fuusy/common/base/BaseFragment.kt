@@ -11,6 +11,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import com.fuusy.common.support.Constants
+import com.fuusy.common.utils.SpUtils
 import com.fuusy.common.view.LoadingDialog
 import retrofit2.HttpException
 import java.net.SocketTimeoutException
@@ -106,4 +108,12 @@ abstract class BaseFragment<T : ViewDataBinding, VM : BaseViewModel> : Fragment 
         Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show()
     }
 
+
+    protected fun isLogin(): Boolean {
+        val userName = SpUtils.getString(Constants.SP_KEY_USER_INFO_NAME)
+        if (userName == null || userName.isEmpty()) {
+            return false
+        }
+        return true
+    }
 }

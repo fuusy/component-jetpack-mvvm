@@ -3,7 +3,7 @@ package com.fuusy.project.repo
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.fuusy.common.network.BaseRepository
+import com.fuusy.common.base.BaseRepository
 import com.fuusy.common.network.ResState
 import com.fuusy.common.network.RetrofitManager
 import com.fuusy.project.bean.ProjectContent

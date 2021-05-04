@@ -2,6 +2,8 @@ package com.fuusy.common.base
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -13,9 +15,11 @@ import retrofit2.HttpException
 import java.net.SocketTimeoutException
 
 private const val TAG = "BaseVmActivity"
+
 abstract class BaseVmActivity<T : ViewDataBinding, VM : BaseViewModel> : AppCompatActivity {
 
     constructor() : super()
+
     private lateinit var mLoadingDialog: LoadingDialog
 
     var mBinding: T? = null
@@ -46,13 +50,16 @@ abstract class BaseVmActivity<T : ViewDataBinding, VM : BaseViewModel> : AppComp
 
     }
 
+    /**
+     * 请求时网络异常的处理
+     */
     private fun throwableHandler(e: Throwable) {
         when (e) {
             is SocketTimeoutException -> showToast("连接超时")
             is HttpException -> {
                 if (e.code() == 504) {
                     showToast("网络异常，请检查您的网络状态")
-                }else if (e.code() == 404) {
+                } else if (e.code() == 404) {
                     showToast("请求地址不存在")
                 }
             }
@@ -89,4 +96,19 @@ abstract class BaseVmActivity<T : ViewDataBinding, VM : BaseViewModel> : AppComp
     fun dismissLoading() {
         mLoadingDialog.dismissDialog()
     }
+
+    /**
+     * 设置toolbar名称
+     */
+    protected fun setToolbarTitle(view: TextView, title: String) {
+        view.text = title
+    }
+
+    /**
+     * 设置toolbar返回按键图片
+     */
+    protected fun setToolbarBackIcon(view: ImageView, id: Int) {
+        view.setBackgroundResource(id)
+    }
+
 }

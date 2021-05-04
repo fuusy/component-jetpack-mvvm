@@ -1,6 +1,5 @@
-package com.fuusy.common.paging
+package com.fuusy.common.widget
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,9 @@ import com.fuusy.common.databinding.PagingFooterItemBinding
 
 
 private const val TAG = "FooterAdapter"
-class FooterAdapter(private val retry: () -> Unit) : LoadStateAdapter<FooterAdapter.FooterViewHolder>() {
+
+class FooterAdapter(private val retry: () -> Unit) :
+    LoadStateAdapter<FooterAdapter.FooterViewHolder>() {
 
     class FooterViewHolder(binding: PagingFooterItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -28,15 +29,19 @@ class FooterAdapter(private val retry: () -> Unit) : LoadStateAdapter<FooterAdap
                 holder.pagingBinding.progressBar.visibility = View.GONE
                 holder.pagingBinding.btRetry.visibility = View.VISIBLE
             }
+
+            is LoadState.NotLoading -> {
+                holder.pagingBinding.progressBar.visibility = View.GONE
+                holder.pagingBinding.btRetry.visibility = View.GONE
+            }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, loadState: LoadState): FooterViewHolder {
-        Log.d(TAG, "onCreateViewHolder: ")
+
         val binding =
             PagingFooterItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         binding.btRetry.setOnClickListener {
-            Log.d(TAG, "onCreateViewHolder: retry")
             retry()
         }
         return FooterViewHolder(binding)

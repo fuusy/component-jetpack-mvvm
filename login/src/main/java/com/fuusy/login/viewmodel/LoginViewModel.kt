@@ -3,8 +3,8 @@ package com.fuusy.login.viewmodel
 import androidx.lifecycle.MutableLiveData
 import com.fuusy.common.base.BaseViewModel
 import com.fuusy.common.network.ResState
-import com.fuusy.login.bean.LoginResp
 import com.fuusy.login.repo.LoginRepo
+import com.fuusy.service.repo.LoginResp
 
 class LoginViewModel : BaseViewModel() {
     val loginLiveData = MutableLiveData<LoginResp>()
@@ -17,7 +17,7 @@ class LoginViewModel : BaseViewModel() {
                 val respState = repo.login(userName, password)
 
                 if (respState is ResState.Success) {
-                    registerLiveData.postValue(respState.data)
+                    loginLiveData.postValue(respState.data)
                 } else if (respState is ResState.Error) {
                     errorLiveData.postValue(respState.exception)
                 }

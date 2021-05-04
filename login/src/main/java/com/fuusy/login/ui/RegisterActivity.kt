@@ -13,6 +13,7 @@ import com.fuusy.login.viewmodel.LoginViewModel
 class RegisterActivity : BaseVmActivity<ActivityRegisterBinding,LoginViewModel>() {
 
     override fun initData() {
+        initToolbar()
         mBinding?.run {
             btRegister.setOnClickListener {
                 mViewModel.register(etUserName.text.toString(),etPassword.text.toString(),etIvPasswordSure.text.toString())
@@ -30,4 +31,14 @@ class RegisterActivity : BaseVmActivity<ActivityRegisterBinding,LoginViewModel>(
     override fun getViewModel(): LoginViewModel =
         ViewModelProviders.of(this).get(LoginViewModel::class.java)
 
+
+    private fun initToolbar() {
+        mBinding?.run {
+            setToolbarBackIcon(llToolbarLogin.ivBack,R.drawable.ic_back_clear)
+            setToolbarTitle(llToolbarLogin.tvTitle,"注册")
+            llToolbarLogin.ivBack.setOnClickListener {
+                finish()
+            }
+        }
+    }
 }

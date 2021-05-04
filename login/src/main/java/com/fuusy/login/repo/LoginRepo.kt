@@ -1,11 +1,9 @@
 package com.fuusy.login.repo
 
-import com.fuusy.common.network.BaseRepository
+import com.fuusy.common.base.BaseRepository
 import com.fuusy.common.network.ResState
 import com.fuusy.common.network.RetrofitManager
-import com.fuusy.login.bean.LoginResp
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import com.fuusy.service.repo.LoginResp
 
 class LoginRepo : BaseRepository() {
 
