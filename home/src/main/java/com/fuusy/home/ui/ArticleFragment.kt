@@ -8,8 +8,8 @@ import androidx.paging.LoadState
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.fuusy.common.base.BaseFragment
-import com.fuusy.home.R
 import com.fuusy.common.widget.FooterAdapter
+import com.fuusy.home.R
 import com.fuusy.home.adapter.paging.HomeArticlePagingAdapter
 import com.fuusy.home.bean.BannerData
 import com.fuusy.home.databinding.FragmentArticleBinding
@@ -42,6 +42,8 @@ class ArticleFragment : BaseFragment<FragmentArticleBinding, ArticleViewModel>()
 
         mViewModel?.getBanner()
         mViewModel?.bannerLiveData?.observe(this, Observer {
+
+            showSuccess()
             //绑定banner
             mBinding?.bannerArticle?.adapter = object : BannerImageAdapter<BannerData>(it) {
                 override fun onBindView(

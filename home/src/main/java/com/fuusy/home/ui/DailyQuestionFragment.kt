@@ -3,9 +3,9 @@ package com.fuusy.home.ui
 import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.lifecycleScope
 import com.fuusy.common.base.BaseFragment
+import com.fuusy.common.widget.FooterAdapter
 import com.fuusy.home.R
 import com.fuusy.home.adapter.paging.DailyQuestionPagingAdapter
-import com.fuusy.common.widget.FooterAdapter
 import com.fuusy.home.databinding.FragmentDailyQuestionBinding
 import com.fuusy.home.viewmodel.ArticleViewModel
 import kotlinx.coroutines.flow.collectLatest

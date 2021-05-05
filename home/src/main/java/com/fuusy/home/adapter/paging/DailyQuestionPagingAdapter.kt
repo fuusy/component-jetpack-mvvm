@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.launcher.ARouter
 import com.fuusy.common.support.Constants
+import com.fuusy.common.support.Constants.Companion.KEY_WEBVIEW_PATH
+import com.fuusy.common.support.Constants.Companion.KEY_WEBVIEW_TITLE
 import com.fuusy.home.bean.DailyQuestionData
 import com.fuusy.home.databinding.ItemRvArticleBinding
 
@@ -50,7 +52,8 @@ class DailyQuestionPagingAdapter :
         holder.itemView.setOnClickListener {
             ARouter.getInstance()
                 .build(Constants.PATH_WEBVIEW)
-                .withString("key_path", item?.link)
+                .withString(KEY_WEBVIEW_PATH, item?.link)
+                .withString(KEY_WEBVIEW_TITLE,item?.title)
                 .navigation()
         }
         item?.let { holder.bindData(it) }
@@ -67,7 +70,8 @@ class DailyQuestionPagingAdapter :
         dailyVH.itemView.setOnClickListener {
             ARouter.getInstance()
                 .build(Constants.PATH_WEBVIEW)
-                .withString("key_path", getItem(dailyVH.layoutPosition)?.link)
+                .withString(KEY_WEBVIEW_PATH, getItem(dailyVH.layoutPosition)?.link)
+                .withString(KEY_WEBVIEW_TITLE,getItem(dailyVH.layoutPosition)?.title)
                 .navigation()
         }
         return dailyVH

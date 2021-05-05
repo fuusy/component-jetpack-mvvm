@@ -8,8 +8,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="55dp">
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/iv_user_icon"
@@ -49,11 +48,27 @@
             app:leftText="我的收藏" />
 
         <com.fuusy.common.widget.SettingView
-            android:id="@+id/setting_item_about"
+            android:id="@+id/setting_item_coin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/setting_item_my_collect"
+            app:leftText="积分排行榜" />
+
+        <com.fuusy.common.widget.SettingView
+            android:id="@+id/setting_item_tool"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/setting_item_coin"
+            app:leftText="常用工具" />
+
+        <com.fuusy.common.widget.SettingView
+            android:id="@+id/setting_item_about"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/setting_item_tool"
             app:leftText="关于" />
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

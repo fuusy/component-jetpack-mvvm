@@ -43,8 +43,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     private lateinit var mFragmentAdapter: VpFragmentAdapter
 
     override fun initData(savedInstanceState: Bundle?) {
-        setupBottomNavigationBar()
-        currentNavController
+        if (savedInstanceState == null) {
+            setupBottomNavigationBar()
+        }
 
 //        mFragmentAdapter = VpFragmentAdapter(this, fragments)
 //        mBinding?.run {

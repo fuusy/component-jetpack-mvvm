@@ -17,7 +17,7 @@
             android:id="@+id/cl_project_item"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/shape_bgh">
+            android:background="@color/color_FF7F50">
 
             <TextView
                 android:id="@+id/tv_project_title"

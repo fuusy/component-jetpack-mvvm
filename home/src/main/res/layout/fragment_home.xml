@@ -10,8 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".HomeFragment"
-        android:layout_marginTop="55dp">
+        tools:context=".HomeFragment">
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/home_tab_layout"

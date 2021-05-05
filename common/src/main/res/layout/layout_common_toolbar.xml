@@ -38,16 +38,20 @@
 
                 <TextView
                     android:id="@+id/tv_title"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:gravity="center"
+                    android:singleLine="true"
+                    android:ellipsize="end"
                     android:visibility="visible"
                     android:textColor="#0D0E10"
                     android:textSize="17sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/iv_back"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="20dp"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <View

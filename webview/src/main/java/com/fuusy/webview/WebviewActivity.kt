@@ -11,6 +11,8 @@ import android.widget.FrameLayout
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.fuusy.common.base.BaseActivity
 import com.fuusy.common.support.Constants
+import com.fuusy.common.support.Constants.Companion.KEY_WEBVIEW_PATH
+import com.fuusy.common.support.Constants.Companion.KEY_WEBVIEW_TITLE
 import com.fuusy.webview.databinding.ActivityWebviewBinding
 
 @Route(path = Constants.PATH_WEBVIEW)
@@ -19,8 +21,9 @@ class WebviewActivity : BaseActivity<ActivityWebviewBinding>() {
     private lateinit var mWebView: WebView
 
     override fun initData(savedInstanceState: Bundle?) {
-        initToolbar()
-        val path = intent.extras?.getString("key_path")
+        val path = intent.extras?.getString(KEY_WEBVIEW_PATH)
+        val title = intent.extras?.getString(KEY_WEBVIEW_TITLE)
+        initToolbar(title)
         initWebView(path)
     }
 
@@ -74,10 +77,10 @@ class WebviewActivity : BaseActivity<ActivityWebviewBinding>() {
         super.onDestroy()
     }
 
-    private fun initToolbar() {
+    private fun initToolbar(title: String?) {
         mBinding?.run {
             setToolbarBackIcon(toolbarLayout.ivBack, R.drawable.ic_back_clear)
-            setToolbarTitle(toolbarLayout.tvTitle, "")
+            title?.let { setToolbarTitle(toolbarLayout.tvTitle, it) }
             toolbarLayout.ivBack.setOnClickListener {
                 finish()
             }

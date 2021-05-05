@@ -1,5 +1,6 @@
 package com.fuusy.project.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
@@ -11,6 +12,7 @@ import com.fuusy.project.bean.ProjectTree
 import com.fuusy.project.repo.ProjectRepo
 import kotlinx.coroutines.flow.Flow
 
+private const val TAG = "ProjectViewModel"
 class ProjectViewModel : BaseViewModel() {
 
     private val mRepo = ProjectRepo()
@@ -24,10 +26,12 @@ class ProjectViewModel : BaseViewModel() {
                 if (state is ResState.Success) {
                     mProjectTreeLiveData.postValue(state.data)
                 } else if (state is ResState.Error) {
+                    Log.d(TAG, "loadProjectTree: ResState.Error")
                     errorLiveData.postValue(state.exception)
                 }
             },
             {
+                Log.d(TAG, "loadProjectTree: postValue")
                 errorLiveData.postValue(it)
             },
             {

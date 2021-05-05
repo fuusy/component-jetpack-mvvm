@@ -4,8 +4,8 @@ package com.fuusy.project.ui
 import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.lifecycleScope
 import com.fuusy.common.base.BaseFragment
-import com.fuusy.common.widget.FooterAdapter
 import com.fuusy.common.support.Constants
+import com.fuusy.common.widget.FooterAdapter
 import com.fuusy.project.R
 import com.fuusy.project.adapter.ProjectPagingAdapter
 import com.fuusy.project.databinding.FragmentProjectContentBinding

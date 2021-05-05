@@ -1,5 +1,6 @@
 package com.fuusy.home.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
@@ -16,7 +17,7 @@ import com.fuusy.home.repo.HomeRepo
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
-
+private const val TAG = "ArticleViewModel"
 class ArticleViewModel() : BaseViewModel() {
     val bannerLiveData = MutableLiveData<List<BannerData>>()
 
@@ -29,8 +30,10 @@ class ArticleViewModel() : BaseViewModel() {
         launch(
             { val bannerState = repo.getBanner()
                 if (bannerState is ResState.Success) {
+                    Log.d(TAG, "getBanner: Success")
                     bannerLiveData.postValue(bannerState.data)
                 } else if (bannerState is ResState.Error){
+                    Log.d(TAG, "getBanner: Error")
                     errorLiveData.postValue(bannerState.exception)
                 }
             },

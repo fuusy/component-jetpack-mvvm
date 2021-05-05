@@ -42,7 +42,8 @@ class HomeArticlePagingAdapter :
         createVH.itemView.setOnClickListener {
             ARouter.getInstance()
                 .build(Constants.PATH_WEBVIEW)
-                .withString("key_path", getItem(createVH.layoutPosition)?.link)
+                .withString(Constants.KEY_WEBVIEW_PATH, getItem(createVH.layoutPosition)?.link)
+                .withString(Constants.KEY_WEBVIEW_TITLE,getItem(createVH.layoutPosition)?.title)
                 .navigation()
         }
         return createVH

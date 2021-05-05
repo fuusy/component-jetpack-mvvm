@@ -1,16 +1,18 @@
 package com.fuusy.common.base
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.fuusy.common.support.SingleLiveData
 import kotlinx.coroutines.*
 import java.lang.Exception
 
+private const val TAG = "BaseViewModel"
 open class BaseViewModel : ViewModel() {
-     val loadingLiveData = MutableLiveData<Boolean>()
+     val loadingLiveData = SingleLiveData<Boolean>()
 
-     val errorLiveData = MutableLiveData<Throwable>()
-
+     val errorLiveData = SingleLiveData<Throwable>()
 
      fun launch(
           block: suspend () -> Unit,
@@ -22,6 +24,7 @@ open class BaseViewModel : ViewModel() {
                try {
                     block()
                } catch (e: Exception) {
+                    Log.d(TAG, "launch: error ")
                     error(e)
                } finally {
                     complete()

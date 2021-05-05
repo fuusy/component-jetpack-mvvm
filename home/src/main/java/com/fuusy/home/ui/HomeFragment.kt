@@ -1,6 +1,7 @@
 package com.fuusy.home.ui
 
 import android.util.Log
+import android.view.View
 import androidx.lifecycle.ViewModelProviders
 import com.fuusy.common.base.BaseFragment
 import com.fuusy.home.R
@@ -8,7 +9,6 @@ import com.fuusy.home.adapter.viewpager.HomePageAdapter
 import com.fuusy.home.databinding.FragmentHomeBinding
 import com.fuusy.home.viewmodel.ArticleViewModel
 import com.google.android.material.tabs.TabLayoutMediator
-import kotlinx.android.synthetic.main.fragment_home.*
 
 private const val TAG = "HomeFragment"
 class HomeFragment : BaseFragment<FragmentHomeBinding, ArticleViewModel>() {

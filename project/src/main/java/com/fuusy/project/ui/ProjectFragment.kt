@@ -20,7 +20,12 @@ class ProjectFragment : BaseFragment<FragmentProjectBinding, ProjectViewModel>()
         initView()
         mViewModel?.loadProjectTree()
         mViewModel?.mProjectTreeLiveData?.observe(this, Observer {
-            mAdapter.setData(it)
+            if (it == null) {
+                showEmpty()
+            } else {
+                showSuccess()
+                mAdapter.setData(it)
+            }
         })
     }
 
@@ -34,4 +39,8 @@ class ProjectFragment : BaseFragment<FragmentProjectBinding, ProjectViewModel>()
 
     override fun getViewModel(): ProjectViewModel =
         ViewModelProviders.of(this).get(ProjectViewModel::class.java)
+
+    override fun onReload() {
+        mViewModel?.loadProjectTree()
+    }
 }

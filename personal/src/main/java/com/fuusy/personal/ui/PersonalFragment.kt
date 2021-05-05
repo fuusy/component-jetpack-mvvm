@@ -1,5 +1,6 @@
 package com.fuusy.personal.ui
 
+import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.alibaba.android.arouter.launcher.ARouter

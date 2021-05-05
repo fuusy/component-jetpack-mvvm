@@ -1,5 +1,6 @@
 package com.fuusy.common.base
 
+import android.util.Log
 import com.fuusy.common.network.BaseResp
 import com.fuusy.common.network.ResState
 import kotlinx.coroutines.CoroutineScope
@@ -8,8 +9,9 @@ import java.io.IOException
 
 
 /**
- * 错误方法
+ *
  */
+private const val TAG = "BaseRepository"
 open class BaseRepository() {
 
     suspend fun <T : Any> executeResp(
@@ -21,6 +23,7 @@ open class BaseRepository() {
                 successBlock?.let { it() }
                 ResState.Success(resp.data)
             } else {
+                Log.d(TAG, "executeResp: error")
                 errorBlock?.let { it() }
                 ResState.Error(IOException(resp.errorMsg))
             }

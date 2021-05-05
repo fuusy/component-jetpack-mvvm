@@ -54,7 +54,8 @@ class ProjectPagingAdapter() :
         holder.itemView.setOnClickListener {
             ARouter.getInstance()
                 .build(Constants.PATH_WEBVIEW)
-                .withString("key_path", item?.link)
+                .withString(Constants.KEY_WEBVIEW_PATH, item?.link)
+                .withString(Constants.KEY_WEBVIEW_TITLE,item?.title)
                 .navigation()
         }
         item?.let { holder.bindData(it) }
