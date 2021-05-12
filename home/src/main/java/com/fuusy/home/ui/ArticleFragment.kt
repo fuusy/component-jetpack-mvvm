@@ -1,6 +1,7 @@
 package com.fuusy.home.ui
 
 import android.util.Log
+import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.lifecycleScope
@@ -8,6 +9,7 @@ import androidx.paging.LoadState
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.fuusy.common.base.BaseFragment
+import com.fuusy.common.network.net.IStateObserver
 import com.fuusy.common.widget.FooterAdapter
 import com.fuusy.home.R
 import com.fuusy.home.adapter.paging.HomeArticlePagingAdapter
@@ -39,23 +41,26 @@ class ArticleFragment : BaseFragment<FragmentArticleBinding, ArticleViewModel>()
                 mArticlePagingAdapter.retry()
             })
 
-
-        mViewModel?.getBanner()
-        mViewModel?.bannerLiveData?.observe(this, Observer {
-
-            showSuccess()
-            //绑定banner
-            mBinding?.bannerArticle?.adapter = object : BannerImageAdapter<BannerData>(it) {
-                override fun onBindView(
-                    holder: BannerImageHolder?,
-                    data: BannerData?,
-                    position: Int,
-                    size: Int
-                ) {
-                    Glide.with(this@ArticleFragment)
-                        .load(data?.imagePath)
-                        .into(holder!!.imageView)
+        mViewModel?.loadBanner()
+        mViewModel?.bannerLiveData?.observe(this, object : IStateObserver<List<BannerData>>(null) {
+            override fun onDataChange(data: List<BannerData>?) {
+                super.onDataChange(data)
+                //绑定banner
+                mBinding?.bannerArticle?.adapter = object : BannerImageAdapter<BannerData>(data) {
+                    override fun onBindView(
+                        holder: BannerImageHolder?,
+                        data: BannerData?,
+                        position: Int,
+                        size: Int
+                    ) {
+                        Glide.with(this@ArticleFragment)
+                            .load(data?.imagePath)
+                            .into(holder!!.imageView)
+                    }
                 }
+            }
+
+            override fun onReload(v: View?) {
             }
         })
 

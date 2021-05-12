@@ -4,25 +4,31 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.fuusy.common.base.BaseRepository
-import com.fuusy.common.network.ResState
 import com.fuusy.common.network.RetrofitManager
+import com.fuusy.common.network.net.StateLiveData
 import com.fuusy.project.bean.ProjectContent
 import com.fuusy.project.bean.ProjectTree
 import kotlinx.coroutines.flow.Flow
 
-class ProjectRepo : BaseRepository() {
+private const val TAG = "ProjectRepo"
+
+class ProjectRepo() : BaseRepository() {
 
     private lateinit var mService: ProjectApi
+
 
     init {
         mService = RetrofitManager.initRetrofit().getService(ProjectApi::class.java)
     }
 
-    suspend fun loadProjectTree(): ResState<List<ProjectTree>> {
-        return executeResp(mService.loadProjectTree())
+
+    suspend fun loadProjectTree(stateLiveData: StateLiveData<List<ProjectTree>>) {
+        executeResp({ mService.loadProjectTree() }, stateLiveData)
     }
 
+
     private val pageSize = 20
+
     //请求首页文章
     fun loadContentById(id: Int): Flow<PagingData<ProjectContent>> {
         val config = PagingConfig(

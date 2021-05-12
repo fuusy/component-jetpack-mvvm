@@ -15,7 +15,10 @@ interface ProjectApi {
 
 
     @GET("project/list/{path}/json")
-    suspend fun loadContentById(@Path("path") path: Int, @Query("cid") cid: Int): BaseResp<BasePagingResp<List<ProjectContent>>>
+    suspend fun loadContentById(
+        @Path("path") path: Int,
+        @Query("cid") cid: Int
+    ): BaseResp<BasePagingResp<List<ProjectContent>>>
 
 
 }

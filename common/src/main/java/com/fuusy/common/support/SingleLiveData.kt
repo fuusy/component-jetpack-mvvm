@@ -11,7 +11,7 @@ import java.util.concurrent.atomic.AtomicBoolean
  * 单事件响应的liveData，只有一个接收者能接收到信息，可以避免不必要的业务的场景中的事件消费通知
  * 只有调用call的时候，observer才能收到通知
  */
-class SingleLiveData<T> : MutableLiveData<T>() {
+open class SingleLiveData<T> : MutableLiveData<T>() {
 
     private val mPending = AtomicBoolean(false)
 

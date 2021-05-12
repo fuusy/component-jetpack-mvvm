@@ -1,10 +1,12 @@
 package com.fuusy.login.ui
 
+import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.fuusy.common.base.BaseVmActivity
+import com.fuusy.common.network.net.IStateObserver
 import com.fuusy.common.support.Constants
 import com.fuusy.common.support.Constants.Companion.KEY_LIVEDATA_BUS_LOGIN
 import com.fuusy.common.support.Constants.Companion.SP_KEY_USER_INFO_NAME
@@ -13,6 +15,7 @@ import com.fuusy.common.utils.SpUtils
 import com.fuusy.login.R
 import com.fuusy.login.databinding.ActivityLoginBinding
 import com.fuusy.login.viewmodel.LoginViewModel
+import com.fuusy.service.repo.LoginResp
 
 private const val TAG = "LoginActivity"
 
@@ -37,12 +40,21 @@ class LoginActivity : BaseVmActivity<ActivityLoginBinding, LoginViewModel>() {
 
     private fun registerObserve() {
         mViewModel.loginLiveData.observe(this, Observer {
-            showToast("登录成功")
-            SpUtils.put(SP_KEY_USER_INFO_NAME, it.nickname)
-            //DbHelper.insertUserInfo(this, it)
-            LiveDataBus.get().with(KEY_LIVEDATA_BUS_LOGIN)
-                .postValue(it)
-            finish()
+
+        })
+        mViewModel.loginLiveData.observe(this,object :IStateObserver<LoginResp>(null){
+            override fun onDataChange(data: LoginResp?) {
+                showToast("登录成功")
+                SpUtils.put(SP_KEY_USER_INFO_NAME, data?.nickname)
+                //DbHelper.insertUserInfo(this, it)
+                LiveDataBus.get().with(KEY_LIVEDATA_BUS_LOGIN)
+                    .postValue(data)
+                finish()
+            }
+
+            override fun onReload(v: View?) {
+                TODO("Not yet implemented")
+            }
         })
     }
 

@@ -1,24 +1,25 @@
 package com.fuusy.project.viewmodel
 
-import android.util.Log
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.fuusy.common.base.BaseViewModel
-import com.fuusy.common.network.ResState
+import com.fuusy.common.network.net.StateLiveData
 import com.fuusy.project.bean.ProjectContent
 import com.fuusy.project.bean.ProjectTree
 import com.fuusy.project.repo.ProjectRepo
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.launch
 
 private const val TAG = "ProjectViewModel"
 class ProjectViewModel : BaseViewModel() {
 
+    val mProjectTreeLiveData = StateLiveData<List<ProjectTree>>()
+
     private val mRepo = ProjectRepo()
 
-    val mProjectTreeLiveData = MutableLiveData<List<ProjectTree>>()
-
+    /*
     fun loadProjectTree() {
         launch(
             {
@@ -38,6 +39,14 @@ class ProjectViewModel : BaseViewModel() {
                 loadingLiveData.postValue(false)
             }
         )
+    }
+
+     */
+
+    fun loadProjectTree() {
+        viewModelScope.launch(Dispatchers.IO) {
+            mRepo.loadProjectTree(mProjectTreeLiveData)
+        }
     }
 
 

@@ -1,28 +1,26 @@
 package com.fuusy.home.viewmodel
 
-import android.util.Log
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.fuusy.common.base.BaseViewModel
-import com.fuusy.common.network.BaseResp
-import com.fuusy.common.network.ResState
+import com.fuusy.common.network.net.StateLiveData
 import com.fuusy.home.ArticleData
-
 import com.fuusy.home.bean.BannerData
 import com.fuusy.home.bean.DailyQuestionData
 import com.fuusy.home.bean.SquareData
 import com.fuusy.home.repo.HomeRepo
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 private const val TAG = "ArticleViewModel"
 class ArticleViewModel() : BaseViewModel() {
-    val bannerLiveData = MutableLiveData<List<BannerData>>()
+    val bannerLiveData = StateLiveData<List<BannerData>>()
 
     private val repo: HomeRepo = HomeRepo()
 
+    /*
     /**
      * 请求首页banner
      */
@@ -43,8 +41,16 @@ class ArticleViewModel() : BaseViewModel() {
             {
                 loadingLiveData.postValue(false)
             })
+
     }
 
+     */
+
+    fun loadBanner() {
+        viewModelScope.launch(Dispatchers.IO) {
+            repo.getBanner(bannerLiveData)
+        }
+    }
     fun articlePagingFlow(): Flow<PagingData<ArticleData>> =
         repo.getHomeArticle().cachedIn(viewModelScope)
 

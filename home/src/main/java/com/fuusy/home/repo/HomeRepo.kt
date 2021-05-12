@@ -4,8 +4,8 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.fuusy.common.base.BaseRepository
-import com.fuusy.common.network.ResState
 import com.fuusy.common.network.RetrofitManager
+import com.fuusy.common.network.net.StateLiveData
 import com.fuusy.home.ArticleData
 
 import com.fuusy.home.api.HomeService
@@ -22,14 +22,25 @@ private const val TAG = "HomeRepo"
 
 class HomeRepo() :
     BaseRepository() {
+
     private var service: HomeService
 
     init {
         service = RetrofitManager.initRetrofit().getService(HomeService::class.java)
     }
 
+    /*
     suspend fun getBanner(): ResState<List<BannerData>> {
         return executeResp(service.getBanner())
+    }
+
+     */
+
+    /**
+     * 请求首页banner
+     */
+    suspend fun getBanner(bannerLiveData: StateLiveData<List<BannerData>>) {
+        executeResp({ service.getBanner() }, bannerLiveData)
     }
 
     private val pageSize = 20

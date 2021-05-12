@@ -15,7 +15,7 @@ class SquarePagingDataSource (private val service: HomeService) :
             val pageNum = params.key ?: 1
             val data = service.getSquareData(pageNum)
             val preKey = if (pageNum > 1) pageNum - 1 else null
-            LoadResult.Page(data.data.datas, prevKey = preKey, nextKey = pageNum + 1)
+            LoadResult.Page(data.data?.datas!!, prevKey = preKey, nextKey = pageNum + 1)
 
         } catch (e: Exception) {
             LoadResult.Error(e)

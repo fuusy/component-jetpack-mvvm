@@ -16,7 +16,7 @@ class ProjectDataSource(private val service: ProjectApi, id: Int) :
             val pageNum = params.key ?: 1
             val data = service.loadContentById(pageNum, mId)
             val preKey = if (pageNum > 1) pageNum - 1 else null
-            LoadResult.Page(data.data.datas, prevKey = preKey, nextKey = pageNum + 1)
+            LoadResult.Page(data.data!!.datas, prevKey = preKey, nextKey = pageNum + 1)
 
         } catch (e: Exception) {
             LoadResult.Error(e)

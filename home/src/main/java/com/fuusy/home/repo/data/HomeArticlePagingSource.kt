@@ -14,7 +14,7 @@ class HomeArticlePagingSource(private var service: HomeService) : PagingSource<I
             val pageNum = params.key ?: 1
             val homeData = service.getHomeArticle(pageNum)
             val preKey = if (pageNum > 1) pageNum - 1 else null
-            LoadResult.Page(homeData.data.datas, prevKey = preKey, nextKey = pageNum + 1)
+            LoadResult.Page(homeData.data?.datas!!, prevKey = preKey, nextKey = pageNum + 1)
         } catch (e: Exception) {
             LoadResult.Error(e)
         }
