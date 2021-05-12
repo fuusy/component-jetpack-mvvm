@@ -4,7 +4,7 @@
 ### 项目简介
 该项目以组件化+Jetpack+Kotlin+MVVM为架构，使用最新Jetpack组件，如Navigation、Paging3、Room等，其中还包括对Retrofit+协程网络请求封装，对error、success、empty等状态进行管理，更加简便快捷的进行数据请求。
 
-
+对于具体的网络封装思路，可直接查看[【Jetpack篇】协程+Retrofit网络请求状态封装实战](https://juejin.cn/post/6958821338672955423)和[【Jetpack篇】协程+Retrofit网络请求状态封装实战（2）](https://juejin.cn/post/6961055228787425288)
 
 ### 版本
 **V1.0.0**
@@ -26,8 +26,6 @@ Gson
 
 Glide
 
-SmartRefreshLayout
-
 Paging3
 
 Arouter
@@ -35,6 +33,8 @@ Arouter
 Room
 
 Navigation
+
+loadSir
 
 另外还有上面没列举的一些优秀的第三方开源库，感谢开源
 
