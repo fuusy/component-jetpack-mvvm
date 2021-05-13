@@ -12,18 +12,11 @@ import kotlinx.coroutines.flow.Flow
 
 private const val TAG = "ProjectRepo"
 
-class ProjectRepo() : BaseRepository() {
-
-    private lateinit var mService: ProjectApi
-
-
-    init {
-        mService = RetrofitManager.initRetrofit().getService(ProjectApi::class.java)
-    }
+class ProjectRepo(private val service: ProjectApi) : BaseRepository() {
 
 
     suspend fun loadProjectTree(stateLiveData: StateLiveData<List<ProjectTree>>) {
-        executeResp({ mService.loadProjectTree() }, stateLiveData)
+        executeResp({ service.loadProjectTree() }, stateLiveData)
     }
 
 
@@ -38,7 +31,7 @@ class ProjectRepo() : BaseRepository() {
             maxSize = pageSize * 3
         )
         return Pager(config) {
-            ProjectDataSource(mService, id)
+            ProjectDataSource(service, id)
         }.flow
     }
 

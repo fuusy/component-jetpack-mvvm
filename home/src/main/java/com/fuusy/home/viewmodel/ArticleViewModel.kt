@@ -15,10 +15,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 private const val TAG = "ArticleViewModel"
-class ArticleViewModel() : BaseViewModel() {
+class ArticleViewModel(private val repo: HomeRepo) : BaseViewModel() {
     val bannerLiveData = StateLiveData<List<BannerData>>()
-
-    private val repo: HomeRepo = HomeRepo()
 
     /*
     /**

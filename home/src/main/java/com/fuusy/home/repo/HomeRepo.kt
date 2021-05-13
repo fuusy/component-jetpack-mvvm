@@ -20,14 +20,8 @@ import kotlinx.coroutines.flow.Flow
 
 private const val TAG = "HomeRepo"
 
-class HomeRepo() :
+class HomeRepo(private val service: HomeService) :
     BaseRepository() {
-
-    private var service: HomeService
-
-    init {
-        service = RetrofitManager.initRetrofit().getService(HomeService::class.java)
-    }
 
     /*
     suspend fun getBanner(): ResState<List<BannerData>> {

@@ -9,11 +9,14 @@ import com.fuusy.home.databinding.FragmentSquareBinding
 import com.fuusy.home.viewmodel.ArticleViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
  * 广场
  */
-class SquareFragment : BaseFragment<FragmentSquareBinding, ArticleViewModel>() {
+class SquareFragment : BaseFragment<FragmentSquareBinding>() {
+
+    private val mViewModel: ArticleViewModel by viewModel()
 
     override fun initData() {
         val pagingAdapter = SquarePagingAdapter()
@@ -22,7 +25,7 @@ class SquareFragment : BaseFragment<FragmentSquareBinding, ArticleViewModel>() {
 
 
         lifecycleScope.launch {
-            mViewModel?.squarePagingFlow()?.collectLatest {
+            mViewModel.squarePagingFlow().collectLatest {
                 pagingAdapter.submitData(it)
             }
         }
@@ -32,6 +35,5 @@ class SquareFragment : BaseFragment<FragmentSquareBinding, ArticleViewModel>() {
         return R.layout.fragment_square
     }
 
-    override fun getViewModel(): ArticleViewModel =
-        ViewModelProviders.of(this).get(ArticleViewModel::class.java)
+
 }

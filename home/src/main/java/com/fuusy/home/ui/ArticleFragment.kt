@@ -20,13 +20,15 @@ import com.youth.banner.adapter.BannerImageAdapter
 import com.youth.banner.holder.BannerImageHolder
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 private const val TAG = "ArticleFragment"
 
 /**
  * 首页Fragment
  */
-class ArticleFragment : BaseFragment<FragmentArticleBinding, ArticleViewModel>() {
+class ArticleFragment : BaseFragment<FragmentArticleBinding>() {
+    private val mViewModel:ArticleViewModel by viewModel()
 
     private var mArticlePagingAdapter =
         HomeArticlePagingAdapter()
@@ -41,8 +43,8 @@ class ArticleFragment : BaseFragment<FragmentArticleBinding, ArticleViewModel>()
                 mArticlePagingAdapter.retry()
             })
 
-        mViewModel?.loadBanner()
-        mViewModel?.bannerLiveData?.observe(this, object : IStateObserver<List<BannerData>>(null) {
+        mViewModel.loadBanner()
+        mViewModel.bannerLiveData.observe(this, object : IStateObserver<List<BannerData>>(null) {
             override fun onDataChange(data: List<BannerData>?) {
                 super.onDataChange(data)
                 //绑定banner
@@ -66,7 +68,7 @@ class ArticleFragment : BaseFragment<FragmentArticleBinding, ArticleViewModel>()
 
         lifecycleScope.launch {
             //请求首页文章列表
-            mViewModel?.articlePagingFlow()?.collectLatest { data ->
+            mViewModel.articlePagingFlow().collectLatest { data ->
                 mArticlePagingAdapter.submitData(data)
             }
         }
@@ -100,8 +102,4 @@ class ArticleFragment : BaseFragment<FragmentArticleBinding, ArticleViewModel>()
     override fun getLayoutId(): Int {
         return R.layout.fragment_article
     }
-
-    override fun getViewModel(): ArticleViewModel =
-        ViewModelProviders.of(this).get(ArticleViewModel::class.java)
-
 }

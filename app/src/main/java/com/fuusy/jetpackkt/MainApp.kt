@@ -8,16 +8,39 @@ import com.alibaba.android.arouter.launcher.ARouter
 import com.fuusy.common.loadsir.EmptyCallback
 import com.fuusy.common.loadsir.ErrorCallback
 import com.fuusy.common.loadsir.LoadingCallback
+import com.fuusy.home.di.moduleHome
+import com.fuusy.login.di.moduleLogin
+import com.fuusy.personal.di.modulePersonal
+import com.fuusy.project.di.moduleProject
 import com.kingja.loadsir.core.LoadSir
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
+import org.koin.core.context.startKoin
 
 
 class MainApp : Application() {
+
+    private val modules = arrayListOf(
+        moduleHome, moduleLogin, modulePersonal, moduleProject
+    )
 
     override fun onCreate() {
         super.onCreate()
         initARouter()
         initLoadSir()
+        initKoin()
+
     }
+
+    //koin
+    private fun initKoin() {
+        startKoin {
+            androidLogger()
+            androidContext(this@MainApp)
+            modules(modules)
+        }
+    }
+
 
     private fun initLoadSir() {
         LoadSir.beginBuilder()

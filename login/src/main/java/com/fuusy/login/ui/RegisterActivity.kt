@@ -8,9 +8,11 @@ import com.fuusy.common.support.Constants
 import com.fuusy.login.R
 import com.fuusy.login.databinding.ActivityRegisterBinding
 import com.fuusy.login.viewmodel.LoginViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 @Route(path = Constants.PATH_REGISTER)
-class RegisterActivity : BaseVmActivity<ActivityRegisterBinding,LoginViewModel>() {
+class RegisterActivity : BaseVmActivity<ActivityRegisterBinding>() {
+    private val mViewModel: LoginViewModel by viewModel()
 
     override fun initData() {
         initToolbar()
@@ -27,9 +29,6 @@ class RegisterActivity : BaseVmActivity<ActivityRegisterBinding,LoginViewModel>(
     }
 
     override fun getLayoutId(): Int = R.layout.activity_register
-
-    override fun getViewModel(): LoginViewModel =
-        ViewModelProviders.of(this).get(LoginViewModel::class.java)
 
 
     private fun initToolbar() {

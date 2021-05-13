@@ -16,11 +16,14 @@ import com.fuusy.login.R
 import com.fuusy.login.databinding.ActivityLoginBinding
 import com.fuusy.login.viewmodel.LoginViewModel
 import com.fuusy.service.repo.LoginResp
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 private const val TAG = "LoginActivity"
 
 @Route(path = Constants.PATH_LOGIN)
-class LoginActivity : BaseVmActivity<ActivityLoginBinding, LoginViewModel>() {
+class LoginActivity : BaseVmActivity<ActivityLoginBinding>() {
+
+    private val mViewModel: LoginViewModel by viewModel()
 
     override fun initData() {
         initToolbar()
@@ -42,7 +45,7 @@ class LoginActivity : BaseVmActivity<ActivityLoginBinding, LoginViewModel>() {
         mViewModel.loginLiveData.observe(this, Observer {
 
         })
-        mViewModel.loginLiveData.observe(this,object :IStateObserver<LoginResp>(null){
+        mViewModel.loginLiveData.observe(this, object : IStateObserver<LoginResp>(null) {
             override fun onDataChange(data: LoginResp?) {
                 showToast("登录成功")
                 SpUtils.put(SP_KEY_USER_INFO_NAME, data?.nickname)
@@ -74,8 +77,6 @@ class LoginActivity : BaseVmActivity<ActivityLoginBinding, LoginViewModel>() {
     }
 
     override fun getLayoutId(): Int = R.layout.activity_login
-    override fun getViewModel(): LoginViewModel =
-        ViewModelProviders.of(this).get(LoginViewModel::class.java)
 
 
 }

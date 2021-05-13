@@ -19,10 +19,9 @@ import com.kingja.loadsir.core.LoadService
 
 private const val TAG = "BaseFragment"
 
-abstract class BaseFragment<T : ViewDataBinding, VM : BaseViewModel> : Fragment() {
+abstract class BaseFragment<T : ViewDataBinding> : Fragment() {
 
     var mBinding: T? = null
-    var mViewModel: VM? = null
     private lateinit var mContext: Context
     private lateinit var mLoadingDialog: LoadingDialog
     private lateinit var loadService: LoadService<Any>
@@ -49,7 +48,6 @@ abstract class BaseFragment<T : ViewDataBinding, VM : BaseViewModel> : Fragment(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mLoadingDialog = LoadingDialog(view.context, false)
-        mViewModel = getViewModel()
         initData()
     }
 
@@ -61,7 +59,6 @@ abstract class BaseFragment<T : ViewDataBinding, VM : BaseViewModel> : Fragment(
 
     abstract fun getLayoutId(): Int
 
-    abstract fun getViewModel(): VM
 
     /**
      * show 加载中

@@ -16,14 +16,13 @@ import java.net.SocketTimeoutException
 
 private const val TAG = "BaseVmActivity"
 
-abstract class BaseVmActivity<T : ViewDataBinding, VM : BaseViewModel> : AppCompatActivity {
+abstract class BaseVmActivity<T : ViewDataBinding> : AppCompatActivity {
 
     constructor() : super()
 
     private lateinit var mLoadingDialog: LoadingDialog
 
     var mBinding: T? = null
-    lateinit var mViewModel: VM
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,47 +30,15 @@ abstract class BaseVmActivity<T : ViewDataBinding, VM : BaseViewModel> : AppComp
         StatusBar().fitSystemBar(this)
         mLoadingDialog = LoadingDialog(this, false)
         mBinding = DataBindingUtil.setContentView(this, getLayoutId())
-        mViewModel = getViewModel()
 
-        mViewModel.loadingLiveData.observe(this, Observer {
-            if (it) {
-                //show loading
-                showLoading()
-            } else {
-                dismissLoading()
-            }
-        })
-
-        mViewModel.errorLiveData.observe(this, Observer {
-            Log.d(TAG, "onViewCreated: error ${it.message}")
-            throwableHandler(it)
-        })
         initData()
 
     }
 
-    /**
-     * 请求时网络异常的处理
-     */
-    private fun throwableHandler(e: Throwable) {
-        when (e) {
-            is SocketTimeoutException -> showToast("连接超时")
-            is HttpException -> {
-                if (e.code() == 504) {
-                    showToast("网络异常，请检查您的网络状态")
-                } else if (e.code() == 404) {
-                    showToast("请求地址不存在")
-                }
-            }
-            else -> e.message?.let { showToast(it) }
-        }
-    }
 
     fun showToast(msg: String) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
     }
-
-    abstract fun getViewModel(): VM
 
     override fun onDestroy() {
         super.onDestroy()

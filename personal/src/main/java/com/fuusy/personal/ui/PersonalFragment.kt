@@ -1,6 +1,5 @@
 package com.fuusy.personal.ui
 
-import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.alibaba.android.arouter.launcher.ARouter
@@ -13,8 +12,12 @@ import com.fuusy.personal.R
 import com.fuusy.personal.databinding.FragmentPersonalBinding
 import com.fuusy.personal.viewmodel.PersonalViewModel
 import com.fuusy.service.repo.LoginResp
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class PersonalFragment : BaseFragment<FragmentPersonalBinding, PersonalViewModel>() {
+class PersonalFragment : BaseFragment<FragmentPersonalBinding>() {
+
+    private val mViewModel: PersonalViewModel by viewModel()
+
     override fun initData() {
 
         mBinding?.run {
@@ -42,9 +45,6 @@ class PersonalFragment : BaseFragment<FragmentPersonalBinding, PersonalViewModel
 
     override fun getLayoutId(): Int =
         R.layout.fragment_personal
-
-    override fun getViewModel(): PersonalViewModel =
-        ViewModelProviders.of(this).get(PersonalViewModel::class.java)
 
 
 }

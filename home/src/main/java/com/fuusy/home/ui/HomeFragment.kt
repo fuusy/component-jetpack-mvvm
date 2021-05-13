@@ -11,7 +11,8 @@ import com.fuusy.home.viewmodel.ArticleViewModel
 import com.google.android.material.tabs.TabLayoutMediator
 
 private const val TAG = "HomeFragment"
-class HomeFragment : BaseFragment<FragmentHomeBinding, ArticleViewModel>() {
+class HomeFragment : BaseFragment<FragmentHomeBinding>() {
+
     private lateinit var homePageAdapter: HomePageAdapter
 
     override fun getLayoutId(): Int {
@@ -35,6 +36,4 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, ArticleViewModel>() {
         }
     }
 
-    override fun getViewModel(): ArticleViewModel =
-        ViewModelProviders.of(this).get(ArticleViewModel::class.java)
 }

@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply from:'../dependencies.gradle'
+apply plugin: 'kotlin-android'
 
 android {
 
@@ -12,6 +13,8 @@ android {
 dependencies {
 
     implementation project(path: ':common')
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation project(path: ':service')
     if (!singleModule.toBoolean()) {
         implementation project(path: ':home')

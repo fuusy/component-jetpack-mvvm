@@ -80,4 +80,14 @@ dependencies {
     implementation 'androidx.room:room-ktx:2.2.5'
     kapt "androidx.room:room-compiler:2.2.5"
 
+    // Koin for Kotlin
+    implementation "org.koin:koin-core:$koin_version"
+    implementation "org.koin:koin-core-ext:$koin_version"
+
+    // Koin for AndroidX
+    implementation "org.koin:koin-androidx-scope:$koin_version"
+    implementation "org.koin:koin-androidx-viewmodel:$koin_version"
+    implementation "org.koin:koin-androidx-fragment:$koin_version"
+    implementation "org.koin:koin-androidx-ext:$koin_version"
+
 }

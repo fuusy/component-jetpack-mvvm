@@ -7,10 +7,9 @@ import com.fuusy.login.repo.LoginRepo
 import com.fuusy.service.repo.LoginResp
 import kotlinx.coroutines.launch
 
-class LoginViewModel : BaseViewModel() {
+class LoginViewModel(private val repo : LoginRepo) : BaseViewModel() {
     val loginLiveData = StateLiveData<LoginResp>()
     val registerLiveData = StateLiveData<LoginResp>()
-    private val repo = LoginRepo()
 
     fun login(userName: String, password: String) {
 

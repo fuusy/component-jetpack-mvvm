@@ -13,11 +13,9 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 private const val TAG = "ProjectViewModel"
-class ProjectViewModel : BaseViewModel() {
-
+class ProjectViewModel(private val repo :ProjectRepo) : BaseViewModel() {
     val mProjectTreeLiveData = StateLiveData<List<ProjectTree>>()
 
-    private val mRepo = ProjectRepo()
 
     /*
     fun loadProjectTree() {
@@ -45,13 +43,13 @@ class ProjectViewModel : BaseViewModel() {
 
     fun loadProjectTree() {
         viewModelScope.launch(Dispatchers.IO) {
-            mRepo.loadProjectTree(mProjectTreeLiveData)
+            repo.loadProjectTree(mProjectTreeLiveData)
         }
     }
 
 
     fun loadProjectContentById(id: Int) : Flow<PagingData<ProjectContent>> =
-        mRepo.loadContentById(id).cachedIn(viewModelScope)
+        repo.loadContentById(id).cachedIn(viewModelScope)
 
 
 

@@ -1,7 +1,6 @@
 package com.fuusy.project.ui
 
 
-import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.lifecycleScope
 import com.fuusy.common.base.BaseFragment
 import com.fuusy.common.support.Constants
@@ -12,8 +11,10 @@ import com.fuusy.project.databinding.FragmentProjectContentBinding
 import com.fuusy.project.viewmodel.ProjectViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ProjectContentFragment : BaseFragment<FragmentProjectContentBinding, ProjectViewModel>() {
+class ProjectContentFragment : BaseFragment<FragmentProjectContentBinding>() {
+    private val mViewModel: ProjectViewModel by viewModel()
 
     private val projectAdapter = ProjectPagingAdapter()
 
@@ -24,7 +25,7 @@ class ProjectContentFragment : BaseFragment<FragmentProjectContentBinding, Proje
         arguments?.apply {
             val int = this.getInt(Constants.KEY_PROJECT_ID)
             lifecycleScope.launch {
-                mViewModel?.loadProjectContentById(int)?.collectLatest { data ->
+                mViewModel.loadProjectContentById(int).collectLatest { data ->
                     projectAdapter.submitData(data)
                 }
             }
@@ -51,9 +52,5 @@ class ProjectContentFragment : BaseFragment<FragmentProjectContentBinding, Proje
 
     override fun getLayoutId(): Int =
         R.layout.fragment_project_content
-
-    override fun getViewModel(): ProjectViewModel =
-        ViewModelProviders.of(this).get(ProjectViewModel::class.java)
-
 
 }
