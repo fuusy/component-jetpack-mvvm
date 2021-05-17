@@ -1,4 +1,4 @@
-# 组件化+Jetpack+Kotlin+MVVM WanAndroid
+# 组件化+Jetpack+Kotlin+MVVM
 
 ![未命名设计.jpg](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/45b57eafdb044cbb8ba16ca895cd986e~tplv-k3u1fbpfcp-watermark.image)
 ### 项目简介
@@ -7,6 +7,12 @@
 对于具体的网络封装思路，可直接查看[【Jetpack篇】协程+Retrofit网络请求状态封装实战](https://juejin.cn/post/6958821338672955423)和[【Jetpack篇】协程+Retrofit网络请求状态封装实战（2）](https://juejin.cn/post/6961055228787425288)
 
 ### 版本
+**持续更新**
+
+**2021.5.17更新**
+1.新增BasePagingAdapter，减少Paging3Adapter冗余代码；
+
+2.删除App Module Fragment的依赖。
 
 **2021.5.12/13更新**
 
