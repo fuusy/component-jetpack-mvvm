@@ -22,13 +22,13 @@
 
         <Button
             android:id="@+id/bt_retry"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:textSize="@dimen/text_size_14"
-            android:text="点击重试"
+            android:textSize="14sp"
+            android:text="@string/load_error"
             android:visibility="gone"
             android:background="@null"
             app:layout_constraintBottom_toBottomOf="parent"/>

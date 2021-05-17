@@ -20,16 +20,17 @@ import kotlinx.coroutines.flow.Flow
 
 private const val TAG = "HomeRepo"
 
-class HomeRepo(private val service: HomeService) :
-    BaseRepository() {
+class HomeRepo(private val service: HomeService) : BaseRepository() {
 
-    /*
-    suspend fun getBanner(): ResState<List<BannerData>> {
-        return executeResp(service.getBanner())
+    companion object{
+        private const val PAGE_SIZE = 20
+        val config = PagingConfig(
+            pageSize = PAGE_SIZE,
+            prefetchDistance = 5,
+            initialLoadSize = 10,
+            maxSize = PAGE_SIZE * 3
+        )
     }
-
-     */
-
     /**
      * 请求首页banner
      */
@@ -37,16 +38,10 @@ class HomeRepo(private val service: HomeService) :
         executeResp({ service.getBanner() }, bannerLiveData)
     }
 
-    private val pageSize = 20
     //请求首页文章
+    //todo paging封装
     fun getHomeArticle(): Flow<PagingData<ArticleData>> {
 
-        val config = PagingConfig(
-            pageSize = pageSize,
-            prefetchDistance = 5,
-            initialLoadSize = 10,
-            maxSize = pageSize * 3
-        )
         return Pager(config) {
             HomeArticlePagingSource(service)
         }.flow
@@ -55,13 +50,6 @@ class HomeRepo(private val service: HomeService) :
     //请求每日问答
     fun  getDailyQuestion() : Flow<PagingData<DailyQuestionData>>{
 
-        val config = PagingConfig(
-            pageSize = pageSize,
-            prefetchDistance = 5,
-            initialLoadSize = 10,
-            maxSize = pageSize * 3
-        )
-
         return Pager(config){
             DailyQuestionPagingSource(service)
         }.flow
@@ -69,14 +57,6 @@ class HomeRepo(private val service: HomeService) :
 
     //请求广场数据
     fun  getSquareData() : Flow<PagingData<SquareData>>{
-
-        val config = PagingConfig(
-            pageSize = pageSize,
-            prefetchDistance = 5,
-            initialLoadSize = 10,
-            maxSize = pageSize * 3
-        )
-
         return Pager(config){
             SquarePagingDataSource(service)
         }.flow

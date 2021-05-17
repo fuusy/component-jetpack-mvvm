@@ -1,18 +1,14 @@
 package com.fuusy.project.adapter
 
-import android.view.LayoutInflater
-import android.view.ViewGroup
-import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.launcher.ARouter
-import com.bumptech.glide.Glide
+import com.fuusy.common.base.paging.BasePagingAdapter
 import com.fuusy.common.support.Constants
+import com.fuusy.project.R
 import com.fuusy.project.bean.ProjectContent
-import com.fuusy.project.databinding.ItemProjectContentBinding
 
 class ProjectPagingAdapter() :
-    PagingDataAdapter<ProjectContent, ProjectPagingAdapter.ProjectVH>(diffCallback) {
+    BasePagingAdapter<ProjectContent>(diffCallback) {
 
     companion object {
         val diffCallback = object : DiffUtil.ItemCallback<ProjectContent>() {
@@ -33,42 +29,20 @@ class ProjectPagingAdapter() :
         }
     }
 
-    class ProjectVH(private val binding: ItemProjectContentBinding) :
-        RecyclerView.ViewHolder(binding.root) {
 
-        fun bindData(data: ProjectContent) {
-            binding.run {
-                Glide.with(this.root)
-                    .load(data.envelopePic)
-                    .into(ivProjectIcon)
-                tvProjectName.text = data.title
-                tvSubName.text = data.desc
+    override fun getItemLayout(position: Int): Int = R.layout.item_project_content
 
-            }
-        }
+    override fun onItemClick(data: ProjectContent?) {
+        ARouter.getInstance()
+            .build(Constants.PATH_WEBVIEW)
+            .withString(Constants.KEY_WEBVIEW_PATH, data?.link)
+            .withString(Constants.KEY_WEBVIEW_TITLE, data?.title)
+            .navigation()
     }
 
-    override fun onBindViewHolder(holder: ProjectVH, position: Int) {
-        val item = getItem(position)
-
-        holder.itemView.setOnClickListener {
-            ARouter.getInstance()
-                .build(Constants.PATH_WEBVIEW)
-                .withString(Constants.KEY_WEBVIEW_PATH, item?.link)
-                .withString(Constants.KEY_WEBVIEW_TITLE,item?.title)
-                .navigation()
-        }
-        item?.let { holder.bindData(it) }
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProjectVH {
-        return ProjectVH(
-            ItemProjectContentBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
-        )
-
+    override fun bindData(helper: ItemHelper, data: ProjectContent?) {
+        helper.setText(R.id.tv_project_name, data?.title)
+        helper.setText(R.id.tv_sub_name, data?.desc)
+        helper.bindImgGlide(R.id.iv_project_icon, data?.envelopePic!!)
     }
 }

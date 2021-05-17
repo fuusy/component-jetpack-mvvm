@@ -1,5 +1,6 @@
 package com.fuusy.common.widget
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,6 +21,7 @@ class FooterAdapter(private val retry: () -> Unit) :
     }
 
     override fun onBindViewHolder(holder: FooterViewHolder, loadState: LoadState) {
+        Log.d(TAG, "onBindViewHolder: $loadState ")
         when (loadState) {
             is LoadState.Loading -> {
                 holder.pagingBinding.progressBar.visibility = View.VISIBLE

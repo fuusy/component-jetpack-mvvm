@@ -1,20 +1,16 @@
 package com.fuusy.home.adapter.paging
 
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.ViewGroup
-import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.launcher.ARouter
+import com.fuusy.common.base.paging.BasePagingAdapter
 import com.fuusy.common.support.Constants
-
+import com.fuusy.home.R
 import com.fuusy.home.bean.SquareData
-import com.fuusy.home.databinding.ItemRvArticleBinding
 
 private const val TAG = "SquarePagingAdapter"
 
-class SquarePagingAdapter : PagingDataAdapter<SquareData, SquareVH>(differCallback) {
+class SquarePagingAdapter : BasePagingAdapter<SquareData>(differCallback) {
 
     companion object {
         val differCallback = object : DiffUtil.ItemCallback<SquareData>() {
@@ -31,43 +27,22 @@ class SquarePagingAdapter : PagingDataAdapter<SquareData, SquareVH>(differCallba
         }
     }
 
-    override fun onBindViewHolder(holder: SquareVH, position: Int) {
-        val item = getItem(position)
-        item?.let { holder.bind(it) }
+    override fun getItemLayout(position: Int): Int = R.layout.item_rv_article
+
+    override fun onItemClick(data: SquareData?) {
+        ARouter.getInstance()
+            .build(Constants.PATH_WEBVIEW)
+            .withString(Constants.KEY_WEBVIEW_PATH, data?.link)
+            .withString(Constants.KEY_WEBVIEW_TITLE, data?.title)
+            .navigation()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SquareVH {
-        val createVH = SquareVH.createVH(parent)
-        createVH.itemView.setOnClickListener {
-            ARouter.getInstance()
-                .build(Constants.PATH_WEBVIEW)
-                .withString(Constants.KEY_WEBVIEW_PATH, getItem(createVH.layoutPosition)?.link)
-                .withString(Constants.KEY_WEBVIEW_TITLE,getItem(createVH.layoutPosition)?.title)
-                .navigation()
-        }
-        return createVH
+    override fun bindData(helper: ItemHelper, data: SquareData?) {
+        helper.setText(R.id.tv_article_title, data?.title)
+        helper.setText(R.id.bt_health_info_type, data?.superChapterName)
+        helper.setText(R.id.tv_home_info_time, data?.niceDate)
+        helper.setText(R.id.tv_article_author, data?.shareUser)
+
     }
 }
 
-class SquareVH(private val binding: ItemRvArticleBinding) : RecyclerView.ViewHolder(binding.root) {
-
-    companion object {
-        fun createVH(parent: ViewGroup): SquareVH {
-            return SquareVH(
-                ItemRvArticleBinding.inflate(
-                    LayoutInflater.from(parent.context),
-                    parent,
-                    false
-                )
-            )
-        }
-    }
-
-    fun bind(data: SquareData) {
-        binding.tvArticleTitle.text = data.title
-        binding.btHealthInfoType.text = data.superChapterName
-        binding.tvHomeInfoTime.text = data.niceDate
-        binding.tvArticleAuthor.text = data.shareUser
-    }
-
-}

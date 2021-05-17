@@ -1,21 +1,15 @@
 package com.fuusy.home.adapter.paging
 
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-
-import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.launcher.ARouter
+import com.fuusy.common.base.paging.BasePagingAdapter
 import com.fuusy.common.support.Constants
 import com.fuusy.common.support.Constants.Companion.KEY_WEBVIEW_PATH
 import com.fuusy.common.support.Constants.Companion.KEY_WEBVIEW_TITLE
+import com.fuusy.home.R
 import com.fuusy.home.bean.DailyQuestionData
-import com.fuusy.home.databinding.ItemRvArticleBinding
 
-class DailyQuestionPagingAdapter :
-    PagingDataAdapter<DailyQuestionData, DailyQuestionPagingAdapter.DailyVH>(diffCallback) {
+class DailyQuestionPagingAdapter :BasePagingAdapter<DailyQuestionData> (diffCallback){
 
     companion object{
         val diffCallback = object : DiffUtil.ItemCallback<DailyQuestionData>() {
@@ -36,45 +30,20 @@ class DailyQuestionPagingAdapter :
         }
     }
 
-    class DailyVH(val binding: ItemRvArticleBinding) : RecyclerView.ViewHolder(binding.root) {
+    override fun getItemLayout(position: Int): Int =  R.layout.item_rv_article
 
-        fun bindData(data: DailyQuestionData) {
-            binding.tvArticleTitle.text = data.title
-            binding.btHealthInfoType.text = data.superChapterName
-            binding.tvArticleAuthor.text = data.author
-            binding.tvHomeInfoTime.text = data.niceShareDate
-        }
+    override fun bindData(helper: ItemHelper, data: DailyQuestionData?) {
+        helper.setText(R.id.tv_article_title, data?.title)
+        helper.setText(R.id.bt_health_info_type, data?.superChapterName)
+        helper.setText(R.id.tv_article_author, data?.author)
+        helper.setText(R.id.tv_home_info_time, data?.niceShareDate)
     }
 
-    override fun onBindViewHolder(holder: DailyVH, position: Int) {
-        val item = getItem(position)
-
-        holder.itemView.setOnClickListener {
-            ARouter.getInstance()
-                .build(Constants.PATH_WEBVIEW)
-                .withString(KEY_WEBVIEW_PATH, item?.link)
-                .withString(KEY_WEBVIEW_TITLE,item?.title)
-                .navigation()
-        }
-        item?.let { holder.bindData(it) }
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DailyVH {
-        val dailyVH = DailyVH(
-            ItemRvArticleBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
-        )
-        dailyVH.itemView.setOnClickListener {
-            ARouter.getInstance()
-                .build(Constants.PATH_WEBVIEW)
-                .withString(KEY_WEBVIEW_PATH, getItem(dailyVH.layoutPosition)?.link)
-                .withString(KEY_WEBVIEW_TITLE,getItem(dailyVH.layoutPosition)?.title)
-                .navigation()
-        }
-        return dailyVH
-
+    override fun onItemClick(data: DailyQuestionData?) {
+        ARouter.getInstance()
+            .build(Constants.PATH_WEBVIEW)
+            .withString(KEY_WEBVIEW_PATH, data?.link)
+            .withString(KEY_WEBVIEW_TITLE,data?.title)
+            .navigation()
     }
 }
