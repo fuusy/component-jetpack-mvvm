@@ -2,11 +2,16 @@ package com.fuusy.home.repo.data
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.fuusy.home.ArticleData
 import com.fuusy.home.api.HomeService
+import com.fuusy.home.bean.ArticleData
 
 private const val TAG = "HomeArticlePagingSource"
 
+/**
+ * @date：2021/5/20
+ * @author fuusy
+ * @instruction：首页文章的pagingSource，主要配合Paging3进行数据请求与显示
+ */
 class HomeArticlePagingSource(private var service: HomeService) : PagingSource<Int, ArticleData>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ArticleData> {

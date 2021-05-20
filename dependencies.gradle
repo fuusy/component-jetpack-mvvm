@@ -62,8 +62,8 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    implementation 'com.github.bumptech.glide:glide:4.11.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+    //implementation 'com.github.bumptech.glide:glide:4.11.0'
+    //annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 
     //paging3
     implementation 'androidx.paging:paging-runtime:3.0.0-beta01'
@@ -75,10 +75,10 @@ dependencies {
     kapt "com.alibaba:arouter-compiler:1.2.2"
 
     //room
-    implementation 'androidx.room:room-runtime:2.2.5'
-    implementation 'androidx.room:room-common:2.2.5'
-    implementation 'androidx.room:room-ktx:2.2.5'
-    kapt "androidx.room:room-compiler:2.2.5"
+    implementation 'androidx.room:room-runtime:2.3.0-alpha01'
+    implementation 'androidx.room:room-common:2.3.0-alpha01'
+    implementation 'androidx.room:room-ktx:2.3.0-alpha01'
+    kapt "androidx.room:room-compiler:2.3.0-alpha01"
 
     // Koin for Kotlin
     implementation "org.koin:koin-core:$koin_version"
@@ -89,5 +89,12 @@ dependencies {
     implementation "org.koin:koin-androidx-viewmodel:$koin_version"
     implementation "org.koin:koin-androidx-fragment:$koin_version"
     implementation "org.koin:koin-androidx-ext:$koin_version"
+
+    implementation  'com.scwang.smart:refresh-layout-kernel:2.0.3'
+    //gson
+    implementation("com.google.code.gson:gson:2.8.6")
+
+    //coil
+    implementation("io.coil-kt:coil:1.2.1")
 
 }

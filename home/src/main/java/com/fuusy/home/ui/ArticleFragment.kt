@@ -1,13 +1,12 @@
 package com.fuusy.home.ui
 
-import android.util.Log
 import android.view.View
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
+import coil.load
+
 import com.fuusy.common.base.BaseFragment
 import com.fuusy.common.network.net.IStateObserver
 import com.fuusy.common.widget.FooterAdapter
@@ -25,21 +24,24 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 private const val TAG = "ArticleFragment"
 
 /**
- * 首页Fragment
+ * @date：2021/5/20
+ * @author fuusy
+ * @instruction：首页文章列表Fragment，包含banner和热门文章列表
  */
+@ExperimentalPagingApi
 class ArticleFragment : BaseFragment<FragmentArticleBinding>() {
-    private val mViewModel:ArticleViewModel by viewModel()
+
+    private val mViewModel: ArticleViewModel by viewModel()
 
     private var mArticlePagingAdapter =
         HomeArticlePagingAdapter()
 
     override fun initData() {
-        Log.d(TAG, "initData: ")
         initListener()
 
         mBinding?.rvHomeArticle?.adapter = mArticlePagingAdapter.withLoadStateFooter(
             FooterAdapter {
-                Log.d(TAG, "initData: retry")
+                //重新请求
                 mArticlePagingAdapter.retry()
             })
 
@@ -55,9 +57,10 @@ class ArticleFragment : BaseFragment<FragmentArticleBinding>() {
                         position: Int,
                         size: Int
                     ) {
-                        Glide.with(this@ArticleFragment)
-                            .load(data?.imagePath)
-                            .into(holder!!.imageView)
+                        holder!!.imageView.load(data?.imagePath){
+                            placeholder(R.mipmap.img_placeholder)
+                        }
+
                     }
                 }
             }
@@ -66,8 +69,8 @@ class ArticleFragment : BaseFragment<FragmentArticleBinding>() {
             }
         })
 
+        //请求首页文章列表
         lifecycleScope.launch {
-            //请求首页文章列表
             mViewModel.articlePagingFlow().collectLatest { data ->
                 mArticlePagingAdapter.submitData(data)
             }

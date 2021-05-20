@@ -2,7 +2,7 @@ package com.fuusy.home.api
 
 import com.fuusy.common.network.BasePagingResp
 import com.fuusy.common.network.BaseResp
-import com.fuusy.home.ArticleData
+import com.fuusy.home.bean.ArticleData
 import com.fuusy.home.bean.BannerData
 import com.fuusy.home.bean.DailyQuestionData
 import com.fuusy.home.bean.SquareData

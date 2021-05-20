@@ -1,16 +1,21 @@
 package com.fuusy.home.ui
 
 import android.util.Log
-import android.view.View
-import androidx.lifecycle.ViewModelProviders
+import androidx.paging.ExperimentalPagingApi
 import com.fuusy.common.base.BaseFragment
 import com.fuusy.home.R
 import com.fuusy.home.adapter.viewpager.HomePageAdapter
 import com.fuusy.home.databinding.FragmentHomeBinding
-import com.fuusy.home.viewmodel.ArticleViewModel
 import com.google.android.material.tabs.TabLayoutMediator
 
 private const val TAG = "HomeFragment"
+
+/**
+ * @date：2021/5/20
+ * @author fuusy
+ * @instruction：整个首页容器，包含‘每日一问’、‘首页’、‘广场’三个fragment
+ */
+@ExperimentalPagingApi
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private lateinit var homePageAdapter: HomePageAdapter

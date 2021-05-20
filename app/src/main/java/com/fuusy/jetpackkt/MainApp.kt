@@ -4,10 +4,12 @@ import android.app.Application
 import android.content.Context
 import androidx.multidex.BuildConfig
 import androidx.multidex.MultiDex
+import androidx.paging.ExperimentalPagingApi
 import com.alibaba.android.arouter.launcher.ARouter
 import com.fuusy.common.loadsir.EmptyCallback
 import com.fuusy.common.loadsir.ErrorCallback
 import com.fuusy.common.loadsir.LoadingCallback
+import com.fuusy.common.utils.AppHelper
 import com.fuusy.home.di.moduleHome
 import com.fuusy.login.di.moduleLogin
 import com.fuusy.personal.di.modulePersonal
@@ -18,6 +20,7 @@ import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 
 
+@ExperimentalPagingApi
 class MainApp : Application() {
 
     private val modules = arrayListOf(
@@ -29,6 +32,7 @@ class MainApp : Application() {
         initARouter()
         initLoadSir()
         initKoin()
+        AppHelper.init(this.applicationContext)
 
     }
 

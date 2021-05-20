@@ -1,4 +1,4 @@
-package com.fuusy.common.view
+package com.fuusy.common.widget
 
 import android.app.Activity
 import android.app.Dialog

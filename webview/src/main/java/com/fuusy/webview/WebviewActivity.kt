@@ -15,6 +15,11 @@ import com.fuusy.common.support.Constants.Companion.KEY_WEBVIEW_PATH
 import com.fuusy.common.support.Constants.Companion.KEY_WEBVIEW_TITLE
 import com.fuusy.webview.databinding.ActivityWebviewBinding
 
+/**
+ * @date：2021/5/20
+ * @author fuusy
+ * @instruction： 动态添加和删除WebView
+ */
 @Route(path = Constants.PATH_WEBVIEW)
 class WebviewActivity : BaseActivity<ActivityWebviewBinding>() {
 

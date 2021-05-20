@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.fuusy.common.support.StatusBar
-import com.fuusy.common.view.LoadingDialog
+import com.fuusy.common.widget.LoadingDialog
 
 abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity {
 

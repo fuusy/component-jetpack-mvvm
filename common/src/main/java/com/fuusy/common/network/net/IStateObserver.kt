@@ -23,7 +23,9 @@ import java.net.ConnectException
 private const val TAG = "IStateObserver"
 
 /**
- * LiveData Observer的一个类，
+ * @date：2021/5/20
+ * @author fuusy
+ * @instruction：LiveData Observer的一个类，
  * 主要结合LoadSir，根据BaseResp里面的State分别加载不同的UI，如Loading，Error
  * 同时重写onChanged回调，分为onDataChange，onDataEmpty，onError，
  * 开发者可以在UI层，每个接口请求时，直接创建IStateObserver，重写相应callback。
@@ -47,7 +49,7 @@ abstract class IStateObserver<T>(view: View?) : Observer<BaseResp<T>>, Callback.
                         //数据为空
                         DataState.STATE_EMPTY -> resultCode =
                             EmptyCallback::class.java
-                        DataState.STATE_FAILED ,DataState.STATE_ERROR -> {
+                        DataState.STATE_FAILED, DataState.STATE_ERROR -> {
                             val error: Throwable? = t.error
                             onError(error)
                             //可以根据不同的错误类型，设置错误界面时的UI
@@ -94,11 +96,12 @@ abstract class IStateObserver<T>(view: View?) : Observer<BaseResp<T>>, Callback.
                 onDataEmpty()
             }
 
-            DataState.STATE_FAILED,DataState.STATE_ERROR->{
+            DataState.STATE_FAILED, DataState.STATE_ERROR -> {
                 //请求错误
                 t.error?.let { onError(it) }
             }
-            else -> { }
+            else -> {
+            }
         }
 
         //加载不同状态界面

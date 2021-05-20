@@ -1,18 +1,14 @@
 package com.fuusy.common.base
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import androidx.lifecycle.Observer
 import com.fuusy.common.support.StatusBar
-import com.fuusy.common.view.LoadingDialog
-import retrofit2.HttpException
-import java.net.SocketTimeoutException
+import com.fuusy.common.widget.LoadingDialog
 
 private const val TAG = "BaseVmActivity"
 

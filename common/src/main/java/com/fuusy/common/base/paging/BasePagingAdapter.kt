@@ -9,8 +9,15 @@ import android.widget.TextView
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
+import coil.load
+import com.fuusy.common.R
 
+
+/**
+ * @date：2021/5/17
+ * @author fuusy
+ * @instruction：Paging3Adapter的公共类，主要减少adapter的冗余代码。
+ */
 private const val TAG = "BasePagingAdapter"
 
 abstract class BasePagingAdapter<T : Any>(private var diffCallback: DiffUtil.ItemCallback<T>) :
@@ -21,12 +28,13 @@ abstract class BasePagingAdapter<T : Any>(private var diffCallback: DiffUtil.Ite
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val item = getItem(position)
+        val item = getItem(position) ?: return
         (holder as BasePagingAdapter<*>.BaseViewHolder).bindNormalData(item)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val holder = BaseViewHolder(parent, viewType)
+        //Item的点击事件
         holder.itemView.setOnClickListener {
             onItemClick(getItem(holder.layoutPosition))
         }
@@ -59,7 +67,9 @@ abstract class BasePagingAdapter<T : Any>(private var diffCallback: DiffUtil.Ite
         private val helper: ItemHelper = ItemHelper(this)
 
         fun bindNormalData(item: Any?) {
+
             bindData(helper, item as T)
+
         }
     }
 
@@ -96,9 +106,10 @@ abstract class BasePagingAdapter<T : Any>(private var diffCallback: DiffUtil.Ite
          */
         fun bindImgGlide(viewId: Int, url: String) {
             val imageView: ImageView = findViewById(viewId) as ImageView
-            Glide.with(itemView)
-                .load(url)
-                .into(imageView)
+            imageView.load(url){
+                placeholder(R.mipmap.img_placeholder)
+            }
+
         }
     }
 

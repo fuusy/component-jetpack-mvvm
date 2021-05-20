@@ -9,7 +9,14 @@
 ### 版本
 **持续更新**
 
+**2021.5.20更新**
+
+1.Paging3和Room结合；
+
+2.将Glide替换为coil
+
 **2021.5.17更新**
+
 1.新增BasePagingAdapter，减少Paging3Adapter冗余代码；
 
 2.删除App Module Fragment的依赖。
@@ -39,7 +46,9 @@ OkHttp
 
 Gson
 
-Glide
+~~Glide~~ Coil
+
+Koin
 
 Paging3
 
@@ -56,7 +65,7 @@ loadSir
 
 
 > License
-> Copyright 2018 fuusy
+> Copyright 2021 fuusy
 > 
 > Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
 > 

@@ -4,14 +4,21 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.paging.LoadState
 import androidx.paging.LoadStateAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.fuusy.common.databinding.PagingFooterItemBinding
+import java.lang.Error
 
 
 private const val TAG = "FooterAdapter"
 
+/**
+ * @date：2021/5/20
+ * @author fuusy
+ * @instruction：Paging 上拉尾部Adapter
+ */
 class FooterAdapter(private val retry: () -> Unit) :
     LoadStateAdapter<FooterAdapter.FooterViewHolder>() {
 
@@ -22,20 +29,10 @@ class FooterAdapter(private val retry: () -> Unit) :
 
     override fun onBindViewHolder(holder: FooterViewHolder, loadState: LoadState) {
         Log.d(TAG, "onBindViewHolder: $loadState ")
-        when (loadState) {
-            is LoadState.Loading -> {
-                holder.pagingBinding.progressBar.visibility = View.VISIBLE
-                holder.pagingBinding.btRetry.visibility = View.GONE
-            }
-            is LoadState.Error -> {
-                holder.pagingBinding.progressBar.visibility = View.GONE
-                holder.pagingBinding.btRetry.visibility = View.VISIBLE
-            }
 
-            is LoadState.NotLoading -> {
-                holder.pagingBinding.progressBar.visibility = View.GONE
-                holder.pagingBinding.btRetry.visibility = View.GONE
-            }
+        holder.pagingBinding.run {
+            progressBar.isVisible = loadState is LoadState.Loading
+            btRetry.isVisible = loadState is LoadState.Error
         }
     }
 
@@ -43,6 +40,7 @@ class FooterAdapter(private val retry: () -> Unit) :
 
         val binding =
             PagingFooterItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        //加载失败时，点击重新请求
         binding.btRetry.setOnClickListener {
             retry()
         }

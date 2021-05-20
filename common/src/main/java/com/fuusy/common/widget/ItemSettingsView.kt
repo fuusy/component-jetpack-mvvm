@@ -1,8 +1,5 @@
 package com.fuusy.common.widget
 
-/**
- * 自定义的设置item的组合控件
- */
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.drawable.Drawable
@@ -16,7 +13,11 @@ import androidx.databinding.DataBindingUtil
 import com.fuusy.common.R
 import com.fuusy.common.databinding.ItemSettingBinding
 
-
+/**
+ * @date：2021/5/20
+ * @author fuusy
+ * @instruction：自定义的设置item的组合控件
+ */
 class SettingView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,

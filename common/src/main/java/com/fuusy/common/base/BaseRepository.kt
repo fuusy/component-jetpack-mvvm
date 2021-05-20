@@ -1,25 +1,30 @@
 package com.fuusy.common.base
 
 import android.util.Log
-import com.fuusy.common.network.net.StateLiveData
 import com.fuusy.common.network.BaseResp
 import com.fuusy.common.network.DataState
 import com.fuusy.common.network.ResState
+import com.fuusy.common.network.net.StateLiveData
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.coroutineScope
 import java.io.IOException
 
 
-/**
- *Repository层基类
- */
 private const val TAG = "BaseRepository"
 
+/**
+ * @date：2021/5/20
+ * @author fuusy
+ * @instruction：子类Repository继承该类，网络请求时主要调用executeResp方法，
+ *               具体流程请参考：https://juejin.cn/post/6961055228787425288
+ */
 open class BaseRepository {
 
     /**
      * repo 请求数据的公共方法，
      * 在不同状态下先设置 baseResp.dataState的值，最后将dataState 的状态通知给UI
+     * @param api的请求方法
+     * @param 每个请求传入相应的LiveData，主要负责网络状态的监听
      */
     suspend fun <T : Any> executeResp(
         block: suspend () -> BaseResp<T>,

@@ -1,6 +1,20 @@
-package com.fuusy.home
+package com.fuusy.home.bean
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import androidx.room.TypeConverter
+import androidx.room.TypeConverters
+import com.fuusy.home.bean.Tag
+import com.fuusy.home.dao.converter.TagTypeConverter
+
+
+@Entity(tableName = "tab_article")
+@TypeConverters(TagTypeConverter::class)
 data class ArticleData(
+    @PrimaryKey(autoGenerate = true)
+    var databaseId: Int,
+    var articleType: Int,
+
     val apkLink: String,
     val audit: Int,
     val author: String,
@@ -36,10 +50,7 @@ data class ArticleData(
     val zan: Int
 )
 
-data class Tag(
-    val name: String,
-    val url: String
-)
+
 
 
 

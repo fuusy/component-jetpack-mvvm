@@ -13,8 +13,7 @@ import com.fuusy.common.R
 import com.fuusy.common.databinding.BaseFragmentLayoutBinding
 import com.fuusy.common.support.Constants
 import com.fuusy.common.utils.SpUtils
-import com.fuusy.common.utils.ToastUtil
-import com.fuusy.common.view.LoadingDialog
+import com.fuusy.common.widget.LoadingDialog
 import com.kingja.loadsir.core.LoadService
 
 private const val TAG = "BaseFragment"

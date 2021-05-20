@@ -36,7 +36,3 @@ data class DailyQuestionData(
     val zan: Int
 )
 
-data class Tag(
-    val name: String,
-    val url: String
-)

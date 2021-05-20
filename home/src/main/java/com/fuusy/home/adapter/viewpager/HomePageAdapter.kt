@@ -2,6 +2,7 @@ package com.fuusy.home.adapter.viewpager
 
 import android.util.Log
 import androidx.fragment.app.Fragment
+import androidx.paging.ExperimentalPagingApi
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.fuusy.home.ui.ArticleFragment
 import com.fuusy.home.ui.DailyQuestionFragment
@@ -9,6 +10,7 @@ import com.fuusy.home.ui.SquareFragment
 
 private const val TAG = "HomePageAdapter"
 
+@ExperimentalPagingApi
 class HomePageAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
     override fun getItemCount(): Int {
         return 3

@@ -1,7 +1,7 @@
 package com.fuusy.home.ui
 
-import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.ExperimentalPagingApi
 import com.fuusy.common.base.BaseFragment
 import com.fuusy.home.R
 import com.fuusy.home.adapter.paging.SquarePagingAdapter
@@ -12,8 +12,11 @@ import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
- * 广场
+ * @date：2021/5/20
+ * @author fuusy
+ * @instruction：
  */
+@ExperimentalPagingApi
 class SquareFragment : BaseFragment<FragmentSquareBinding>() {
 
     private val mViewModel: ArticleViewModel by viewModel()

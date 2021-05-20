@@ -4,7 +4,7 @@ import androidx.recyclerview.widget.DiffUtil
 import com.alibaba.android.arouter.launcher.ARouter
 import com.fuusy.common.base.paging.BasePagingAdapter
 import com.fuusy.common.support.Constants
-import com.fuusy.home.ArticleData
+import com.fuusy.home.bean.ArticleData
 import com.fuusy.home.R
 
 class HomeArticlePagingAdapter :
