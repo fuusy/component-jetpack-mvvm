@@ -67,9 +67,7 @@ abstract class BasePagingAdapter<T : Any>(private var diffCallback: DiffUtil.Ite
         private val helper: ItemHelper = ItemHelper(this)
 
         fun bindNormalData(item: Any?) {
-
             bindData(helper, item as T)
-
         }
     }
 
@@ -102,11 +100,11 @@ abstract class BasePagingAdapter<T : Any>(private var diffCallback: DiffUtil.Ite
         }
 
         /**
-         * Glide加载图片
+         * Coil加载图片
          */
         fun bindImgGlide(viewId: Int, url: String) {
             val imageView: ImageView = findViewById(viewId) as ImageView
-            imageView.load(url){
+            imageView.load(url) {
                 placeholder(R.mipmap.img_placeholder)
             }
 

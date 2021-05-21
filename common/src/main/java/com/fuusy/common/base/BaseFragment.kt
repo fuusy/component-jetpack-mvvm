@@ -54,6 +54,7 @@ abstract class BaseFragment<T : ViewDataBinding> : Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
+        mBinding?.unbind()
     }
 
     abstract fun getLayoutId(): Int

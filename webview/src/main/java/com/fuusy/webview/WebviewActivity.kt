@@ -1,13 +1,14 @@
 package com.fuusy.webview
 
+import android.content.Intent
 import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
+import android.view.View
 import android.view.ViewGroup
-import android.webkit.WebResourceError
-import android.webkit.WebResourceRequest
-import android.webkit.WebView
-import android.webkit.WebViewClient
+import android.webkit.*
 import android.widget.FrameLayout
+import androidx.core.view.isVisible
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.fuusy.common.base.BaseActivity
 import com.fuusy.common.support.Constants
@@ -48,23 +49,28 @@ class WebviewActivity : BaseActivity<ActivityWebviewBinding>() {
         webSetting.javaScriptEnabled = true
 
         mWebView.webViewClient = object : WebViewClient() {
-            override fun onPageFinished(view: WebView?, url: String?) {
-                super.onPageFinished(view, url)
-                dismissLoading()
+            override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
+                if (url == null) {
+                    return false
+                }
+                try {
+                    if (url.startsWith("weixin://") || url.startsWith("jianshu://")) {
+                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                        startActivity(intent)
+                        return true
+                    }
+                } catch (e: Exception) {
+                    return true
+                }
+                view?.loadUrl(url)
+                return true
             }
+        }
 
-            override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
-                super.onPageStarted(view, url, favicon)
-                showLoading()
-            }
-
-            override fun onReceivedError(
-                view: WebView?,
-                request: WebResourceRequest?,
-                error: WebResourceError?
-            ) {
-                super.onReceivedError(view, request, error)
-                dismissLoading()
+        mWebView.webChromeClient = object : WebChromeClient() {
+            override fun onProgressChanged(view: WebView?, newProgress: Int) {
+                mBinding?.progressBar?.isVisible = newProgress != 100
+                mBinding?.progressBar?.progress = newProgress
             }
         }
 

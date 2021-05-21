@@ -2,6 +2,7 @@ package com.fuusy.home.ui
 
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.ExperimentalPagingApi
+import androidx.paging.LoadState
 import com.fuusy.common.base.BaseFragment
 import com.fuusy.common.widget.FooterAdapter
 import com.fuusy.home.R
@@ -25,10 +26,25 @@ class DailyQuestionFragment : BaseFragment<FragmentDailyQuestionBinding>() {
 
     override fun initData() {
         initRecyclerview()
+        initListener()
+        loadData()
+    }
 
-        lifecycleScope.launch {
+    private fun loadData() {
+        lifecycleScope.launchWhenCreated {
             mViewModel.dailyQuestionPagingFlow().collectLatest {
                 dailyPagingAdapter.submitData(it)
+            }
+        }
+    }
+
+    private fun initListener() {
+        mBinding?.swipeLayout?.setOnRefreshListener {
+            dailyPagingAdapter.refresh()
+        }
+        lifecycleScope.launchWhenCreated {
+            dailyPagingAdapter.loadStateFlow.collectLatest {
+                mBinding?.swipeLayout?.isRefreshing = it.refresh is LoadState.Loading
             }
         }
     }
@@ -38,13 +54,6 @@ class DailyQuestionFragment : BaseFragment<FragmentDailyQuestionBinding>() {
             FooterAdapter {
                 dailyPagingAdapter.retry()
             })
-
-        dailyPagingAdapter.addLoadStateListener {
-
-            when (it.refresh) {
-
-            }
-        }
 
     }
 

@@ -10,6 +10,11 @@ import com.fuusy.home.ui.SquareFragment
 
 private const val TAG = "HomePageAdapter"
 
+/**
+ * @date：2021/5/21
+ * @author fuusy
+ * @instruction： 首页ViewPagerAdapter，主要加载DailyQuestionFragment、ArticleFragment、SquareFragment
+ */
 @ExperimentalPagingApi
 class HomePageAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
     override fun getItemCount(): Int {

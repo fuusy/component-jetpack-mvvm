@@ -20,11 +20,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            app:layout_constraintTop_toBottomOf="@id/toolbar_layout"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:visibility="gone"/>
+
         <FrameLayout
             android:id="@+id/fl_webview_contain"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintTop_toBottomOf="@id/toolbar_layout"
+            app:layout_constraintTop_toBottomOf="@id/progress_bar"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

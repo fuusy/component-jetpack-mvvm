@@ -13,7 +13,7 @@
 
 1.Paging3和Room结合；
 
-2.将Glide替换为coil
+2.将Glide替换为Coil
 
 **2021.5.17更新**
 

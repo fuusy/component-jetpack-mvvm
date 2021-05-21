@@ -12,6 +12,7 @@ import com.fuusy.common.widget.LoadingDialog
 abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity {
 
     constructor() : super()
+
     private lateinit var mLoadingDialog: LoadingDialog
 
     var mBinding: T? = null
@@ -49,7 +50,6 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity {
     fun dismissLoading() {
         mLoadingDialog.dismissDialog()
     }
-
 
 
     /**
