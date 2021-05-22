@@ -1,6 +1,7 @@
 # 组件化+Jetpack+Kotlin+MVVM
 
-![06e26ca86293e3c45b887634fec55fd5.png](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/62eb3cddf6b843718870f0841d521fc1~tplv-k3u1fbpfcp-watermark.image)
+![ivo.png](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3a668ed3da9b425eb430856413352304~tplv-k3u1fbpfcp-watermark.image)
+
 ## 一、项目简介
 
 ![微信截图_20210521163936.png](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d9dc6efa53634401b7f9be3d2dc89092~tplv-k3u1fbpfcp-watermark.image)
