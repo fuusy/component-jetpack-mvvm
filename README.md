@@ -5,7 +5,7 @@
 ## 一、项目简介
 
 ![微信截图_20210521163936.png](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d9dc6efa53634401b7f9be3d2dc89092~tplv-k3u1fbpfcp-watermark.image)
-该项目主要以`组件化+Jetpack+MVVM`为架构，使用`Kotlin`语言，集合了最新的`Jetpack`组件，如`Navigation`、`Paging3`、`Room`等，另外还加上了依赖注入框架`Koin`和图片加载框架`Coin`。
+该项目主要以`组件化+Jetpack+MVVM`为架构，使用`Kotlin`语言，集合了最新的`Jetpack`组件，如`Navigation`、`Paging3`、`Room`等，另外还加上了依赖注入框架`Koin`和图片加载框架`Coil`。
 
 网络请求部分使用`OkHttp`+`Retrofit`，配合Kotlin的`协程`，完成了对`Retrofit和协程的请求封装`，结合`LoadSir`进行状态切换管理，让开发者只用关注自己的业务逻辑，而不要操心界面的切换和通知。
 
