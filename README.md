@@ -1,6 +1,6 @@
 # 组件化+Jetpack+Kotlin+MVVM
 
-![icon.png](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/62eb3cddf6b843718870f0841d521fc1~tplv-k3u1fbpfcp-watermark.image)
+![06e26ca86293e3c45b887634fec55fd5.png](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/62eb3cddf6b843718870f0841d521fc1~tplv-k3u1fbpfcp-watermark.image)
 ## 一、项目简介
 
 ![微信截图_20210521163936.png](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d9dc6efa53634401b7f9be3d2dc89092~tplv-k3u1fbpfcp-watermark.image)
@@ -46,7 +46,7 @@ dependencies {
 当新建多个Moudle的时候，运行后你会发现桌面上会出现多个相同的图标，
 
 
-![image-20210425100807316.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/553f87db5b854dfab21b610b3c5dedc1~tplv-k3u1fbpfcp-watermark.image)
+![微信截图_20210522184326.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d4fd4a33dc5e4334a4e1acdf9ce98da5~tplv-k3u1fbpfcp-watermark.image)
 
 其实每个图标都能够独立运行，但是到最后App发布的时候，肯定是只需要一个总入口就可以了。
 
