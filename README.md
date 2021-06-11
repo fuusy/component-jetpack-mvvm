@@ -9,9 +9,15 @@
 
 网络请求部分使用`OkHttp`+`Retrofit`，配合Kotlin的`协程`，完成了对`Retrofit和协程的请求封装`，结合`LoadSir`进行状态切换管理，让开发者只用关注自己的业务逻辑，而不要操心界面的切换和通知。
 
-对于具体的网络封装思路，可参考[【Jetpack篇】协程+Retrofit网络请求状态封装实战](https://juejin.cn/post/6958821338672955423)和[【Jetpack篇】协程+Retrofit网络请求状态封装实战（2）](https://juejin.cn/post/6961055228787425288)
+对于具体的网络封装思路，可参考
+
+[【Jetpack篇】协程+Retrofit网络请求状态封装实战](https://juejin.cn/post/6958821338672955423)
+
+[【Jetpack篇】协程+Retrofit网络请求状态封装实战（2）](https://juejin.cn/post/6961055228787425288)
 
 > 项目地址：https://github.com/fuusy/wanandroid_jetpack_kt
+
+
 **如果此项目对你有帮助和价值，烦请给个star,或者有什么好的建议或意见，也可以发个issues，感谢！**
 
 ## 二、项目详情
