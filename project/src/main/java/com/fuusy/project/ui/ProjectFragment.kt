@@ -11,12 +11,20 @@ import com.fuusy.project.databinding.FragmentProjectBinding
 import com.fuusy.project.viewmodel.ProjectViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-private const val TAG = "ProjectFragment"
 
+/**
+ * @date：2021/6/11
+ * @author fuusy
+ * @instruction：‘项目’Fragment
+ */
 class ProjectFragment : BaseFragment<FragmentProjectBinding>() {
 
     private val mViewModel: ProjectViewModel by viewModel()
     private val mAdapter by lazy { ProjectAdapter() }
+
+    companion object {
+        private const val TAG = "ProjectFragment"
+    }
 
     override fun initData() {
         Log.d(TAG, "initData: ")

@@ -6,11 +6,11 @@ import com.fuusy.common.network.DataState
 import com.fuusy.common.network.ResState
 import com.fuusy.common.network.net.StateLiveData
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.flow.*
 import java.io.IOException
 
-
-private const val TAG = "BaseRepository"
 
 /**
  * @date：2021/5/20
@@ -20,11 +20,65 @@ private const val TAG = "BaseRepository"
  */
 open class BaseRepository {
 
+    companion object {
+        private const val TAG = "BaseRepository"
+    }
+
     /**
+     * 方式二：结合Flow请求数据。
+     * 根据Flow的不同请求状态，如onStart、onEmpty、onCompletion等设置baseResp.dataState状态值，
+     * 最后通过stateLiveData分发给UI层。
+     *
+     * @param block api的请求方法
+     * @param stateLiveData 每个请求传入相应的LiveData，主要负责网络状态的监听
+     */
+    suspend fun <T : Any> executeReqWithFlow(
+        block: suspend () -> BaseResp<T>,
+        stateLiveData: StateLiveData<T>
+    ) {
+        var baseResp = BaseResp<T>()
+        flow {
+            val respResult = block.invoke()
+            baseResp = respResult
+            Log.d(TAG, "executeReqWithFlow: $baseResp")
+            baseResp.dataState = DataState.STATE_SUCCESS
+            stateLiveData.postValue(baseResp)
+            emit(respResult)
+        }
+            .flowOn(Dispatchers.IO)
+            .onStart {
+                Log.d(TAG, "executeReqWithFlow:onStart")
+                baseResp.dataState = DataState.STATE_LOADING
+                stateLiveData.postValue(baseResp)
+            }
+            .onEmpty {
+                Log.d(TAG, "executeReqWithFlow:onEmpty")
+                baseResp.dataState = DataState.STATE_EMPTY
+                stateLiveData.postValue(baseResp)
+            }
+            .catch { exception ->
+                run {
+                    Log.d(TAG, "executeReqWithFlow:code  ${baseResp.errorCode}")
+                    exception.printStackTrace()
+                    baseResp.dataState = DataState.STATE_ERROR
+                    baseResp.error = exception
+                    stateLiveData.postValue(baseResp)
+                }
+            }
+            .collect {
+                Log.d(TAG, "executeReqWithFlow: collect")
+                stateLiveData.postValue(baseResp)
+            }
+
+
+    }
+
+    /**
+     * 方式一
      * repo 请求数据的公共方法，
      * 在不同状态下先设置 baseResp.dataState的值，最后将dataState 的状态通知给UI
-     * @param api的请求方法
-     * @param 每个请求传入相应的LiveData，主要负责网络状态的监听
+     * @param block api的请求方法
+     * @param stateLiveData 每个请求传入相应的LiveData，主要负责网络状态的监听
      */
     suspend fun <T : Any> executeResp(
         block: suspend () -> BaseResp<T>,
@@ -63,8 +117,7 @@ open class BaseRepository {
 
 
     /**
-     * @deprecated Use {@link executeResp}
-     * instead.
+     * @deprecated Use {@link executeResp} instead.
      */
     suspend fun <T : Any> executeResp(
         resp: BaseResp<T>,

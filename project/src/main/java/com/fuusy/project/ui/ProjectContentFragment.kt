@@ -13,6 +13,11 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+/**
+ * @date：2021/6/11
+ * @author fuusy
+ * @instruction：项目列表ListFragment
+ */
 class ProjectContentFragment : BaseFragment<FragmentProjectContentBinding>() {
     private val mViewModel: ProjectViewModel by viewModel()
 
@@ -30,7 +35,6 @@ class ProjectContentFragment : BaseFragment<FragmentProjectContentBinding>() {
                 }
             }
         }
-
 
         mBinding?.run {
             rvProjectContent.adapter = projectAdapter.withLoadStateFooter(FooterAdapter {

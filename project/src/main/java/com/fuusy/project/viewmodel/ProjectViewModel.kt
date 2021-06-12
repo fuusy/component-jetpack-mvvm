@@ -13,7 +13,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 private const val TAG = "ProjectViewModel"
-class ProjectViewModel(private val repo :ProjectRepo) : BaseViewModel() {
+
+class ProjectViewModel(private val repo: ProjectRepo) : BaseViewModel() {
     val mProjectTreeLiveData = StateLiveData<List<ProjectTree>>()
 
 
@@ -41,16 +42,22 @@ class ProjectViewModel(private val repo :ProjectRepo) : BaseViewModel() {
 
      */
 
+    /**
+     * 向Repository层请求项目分类。
+     */
     fun loadProjectTree() {
         viewModelScope.launch(Dispatchers.IO) {
             repo.loadProjectTree(mProjectTreeLiveData)
         }
     }
 
-
-    fun loadProjectContentById(id: Int) : Flow<PagingData<ProjectContent>> =
+    /**
+     * 根据项目ID请求项目列表详情。Paging3+Flow
+     *
+     * @param id 项目分类ID
+     */
+    fun loadProjectContentById(id: Int): Flow<PagingData<ProjectContent>> =
         repo.loadContentById(id).cachedIn(viewModelScope)
-
 
 
 }

@@ -18,13 +18,11 @@ import com.fuusy.common.R
  * @author fuusy
  * @instruction：Paging3Adapter的公共类，主要减少adapter的冗余代码。
  */
-private const val TAG = "BasePagingAdapter"
-
 abstract class BasePagingAdapter<T : Any>(private var diffCallback: DiffUtil.ItemCallback<T>) :
     PagingDataAdapter<T, RecyclerView.ViewHolder>(diffCallback) {
 
     companion object {
-
+        private const val TAG = "BasePagingAdapter"
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {

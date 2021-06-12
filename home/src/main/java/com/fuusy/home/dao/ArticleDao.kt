@@ -16,5 +16,4 @@ interface ArticleDao {
     @Query("DELETE FROM tab_article WHERE articleType=:articleType")
     suspend fun clearArticleByType(articleType: Int)
 
-
 }
