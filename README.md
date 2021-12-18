@@ -1,5 +1,11 @@
 # 组件化+Jetpack+Kotlin+MVVM
 
+[Jetpack版](https://github.com/fuusy/component-jetpack-mvvm)
+
+[Flutter版](https://github.com/fuusy/flutter_read)
+
+---
+
 ![ivo.png](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3a668ed3da9b425eb430856413352304~tplv-k3u1fbpfcp-watermark.image)
 
 ## 一、项目简介
